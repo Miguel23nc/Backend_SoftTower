@@ -2,71 +2,86 @@ const BoletaDePagos = require("../../../models/RecursosHumanos/BoletaDePago");
 const generarCorrelativa = require("./correlativa");
 
 const postBoletaDePagos = async (req, res) => {
-  const {
-    fechaBoletaDePago,
-    colaborador,
-    diasTrabajados,
-    diasSubsidiados,
-    horasTrabajadas,
-    diasNoLaborales,
-    remuneraciones,
-    descuentosAlTrabajador,
-    aportacionesDelEmpleador,
-  } = req.body;
   try {
-    let fechaOperacionDate;
-    if (fechaBoletaDePago.includes("/")) {
-      fechaOperacionDate = fechaBoletaDePago;
-    } else {
-      const [month, year] = fechaBoletaDePago?.split("/");
-      fechaOperacionDate = new Date(`${year}/${month}`);
+    const boletas = req.body; // Ahora esperamos un array de objetos
+
+    if (!Array.isArray(boletas) || boletas.length === 0) {
+      return res.status(400).json({ message: "Debes enviar al menos una boleta válida." });
     }
 
-    const boletaFound = await BoletaDePagos.findOne({
-      fechaBoletaDePago,
-      colaborador,
-    });
+    for (const boleta of boletas) {
+      const {
+        fechaBoletaDePago,
+        colaborador,
+        diasTrabajados,
+        diasSubsidiados,
+        horasTrabajadas,
+        diasNoLaborales,
+        remuneraciones,
+        descuentosAlTrabajador,
+        aportacionesDelEmpleador,
+      } = boleta;
 
-    if (boletaFound) {
-      return res.status(400).json({
-        message: "La Boleta de pagos del colaborador en esa fecha ya existe",
+      // Validar que cada boleta tenga los datos correctos
+      if (
+        !fechaBoletaDePago ||
+        !colaborador ||
+        typeof diasTrabajados !== "number" ||
+        typeof diasSubsidiados !== "number" ||
+        typeof horasTrabajadas !== "number" ||
+        typeof diasNoLaborales !== "number" ||
+        !Array.isArray(remuneraciones) || remuneraciones.length === 0 ||
+        !Array.isArray(descuentosAlTrabajador) || descuentosAlTrabajador.length === 0 ||
+        !Array.isArray(aportacionesDelEmpleador) || aportacionesDelEmpleador.length === 0
+      ) {
+        return res.status(400).json({ message: "Uno o más objetos en la solicitud son inválidos." });
+      }
+
+      let fechaOperacionDate;
+      if (typeof fechaBoletaDePago === "string" && fechaBoletaDePago.includes("/")) {
+        const [month, year] = fechaBoletaDePago.split("/");
+        if (!month || !year) {
+          return res.status(400).json({ message: "Fecha inválida en alguna boleta." });
+        }
+        fechaOperacionDate = new Date(`${year}/${month}`);
+      } else {
+        fechaOperacionDate = fechaBoletaDePago;
+      }
+
+      const boletaFound = await BoletaDePagos.findOne({ fechaBoletaDePago, colaborador });
+      if (boletaFound) {
+        return res.status(400).json({ message: `La boleta para el colaborador ${colaborador} en la fecha ${fechaBoletaDePago} ya existe.` });
+      }
+
+      const correlativa = await generarCorrelativa(fechaOperacionDate);
+      if (!correlativa) {
+        return res.status(500).json({ message: "Error al generar correlativa." });
+      }
+
+      const nuevaBoleta = new BoletaDePagos({
+        correlativa,
+        fechaBoletaDePago,
+        colaborador,
+        diasTrabajados,
+        diasSubsidiados,
+        horasTrabajadas,
+        diasNoLaborales,
+        remuneraciones,
+        descuentosAlTrabajador,
+        aportacionesDelEmpleador,
       });
+
+      await nuevaBoleta.save();
     }
-    if (
-      !fechaBoletaDePago ||
-      !colaborador ||
-      !diasTrabajados ||
-      !diasSubsidiados ||
-      !horasTrabajadas ||
-      !diasNoLaborales ||
-      !remuneraciones ||
-      !descuentosAlTrabajador ||
-      !aportacionesDelEmpleador
-    ) {
-      return res
-        .status(400)
-        .json({ message: "Por favor llena todos los campos" });
-    }
-    const correlativa = await generarCorrelativa(fechaOperacionDate);
-    if (!correlativa)
-      return res.status(500).json({ message: "Error al generar correlativa" });
-    const boleta = new BoletaDePagos({
-      correlativa,
-      fechaBoletaDePago,
-      colaborador,
-      diasTrabajados,
-      diasSubsidiados,
-      horasTrabajadas,
-      diasNoLaborales,
-      remuneraciones,
-      descuentosAlTrabajador,
-      aportacionesDelEmpleador,
-    });
-    await boleta.save();
-    return res.status(201).json({ message: "Boleta de pagos creada" });
+
+    return res.status(201).json({ message: "Boletas de pago creadas exitosamente" });
+
   } catch (error) {
-    return res.status(500).json({ message: error.message });
+    console.error("Error en postBoletaDePagos:", error);
+    return res.status(500).json({ message: "Error interno del servidor", error: error.message });
   }
 };
 
 module.exports = postBoletaDePagos;
+
+
