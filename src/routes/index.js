@@ -46,6 +46,7 @@ const recepcionBoleta = require("../controllers/RecursosHumanos/BoletaDePagos/re
 const returnPdf = require("../controllers/RecursosHumanos/Asistencia/colaborador/returnPdf");
 const updateAsistenciaColaborador = require("../controllers/RecursosHumanos/Asistencia/colaborador/updateAsistenciaColaborador");
 const deleteBoletaDePago = require("../controllers/RecursosHumanos/BoletaDePagos/deleteBoletaDePago");
+const subirBoletas = require("../controllers/RecursosHumanos/BoletaDePagos/subirBoletas");
 
 const router = Router();
 
@@ -64,6 +65,7 @@ router.post("/postAsistenciaColaborador", postAsistenciaColaborador);
 router.post("/postBoletaDePagos", postBoletaDePagos);
 router.post("/postDatosContables", postDatosContables);
 router.post("/enviarBoletasDePago", enviarBoleta);
+router.post("/boletajson", subirBoletas);
 router.post("/returnPdf", returnPdf);
 
 router.patch("/patchBusiness", updateBusinessPartial);
