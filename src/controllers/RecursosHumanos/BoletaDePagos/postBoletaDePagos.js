@@ -14,8 +14,10 @@ const postBoletaDePagos = async (req, res) => {
     aportacionesDelEmpleador,
   } = req.body;
   try {
-    let fechaOperacionDate = fechaBoletaDePago;
-    if (fechaBoletaDePago.includes("-")) {
+    let fechaOperacionDate;
+    if (fechaBoletaDePago.includes("/")) {
+      fechaOperacionDate = fechaBoletaDePago;
+    } else {
       const [month, year] = fechaBoletaDePago?.split("/");
       fechaOperacionDate = new Date(`${year}/${month}`);
     }
