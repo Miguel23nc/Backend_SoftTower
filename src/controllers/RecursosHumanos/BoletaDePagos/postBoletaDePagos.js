@@ -14,8 +14,11 @@ const postBoletaDePagos = async (req, res) => {
     aportacionesDelEmpleador,
   } = req.body;
   try {
-    const [month, year] = fechaBoletaDePago.split("/");
-    const fechaOperacionDate = new Date(`${year}/${month}`);
+    let fechaOperacionDate = fechaBoletaDePago;
+    if (fechaBoletaDePago.includes("-")) {
+      const [month, year] = fechaBoletaDePago?.split("/");
+      fechaOperacionDate = new Date(`${year}/${month}`);
+    }
 
     const boletaFound = await BoletaDePagos.findOne({
       fechaBoletaDePago,

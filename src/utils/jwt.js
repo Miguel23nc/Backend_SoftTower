@@ -8,7 +8,7 @@ const generatetoken = (user) => {
       _id: user._id,
       email: user.email,
     };
-    return jwt.sign(payload, JWT_SECRET, { expiresIn: "8h" });
+    return jwt.sign(payload, JWT_SECRET, { expiresIn: "24h" });
   } catch (error) {
     console.log(error);
   }
