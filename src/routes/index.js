@@ -47,6 +47,7 @@ const returnPdf = require("../controllers/RecursosHumanos/Asistencia/colaborador
 const updateAsistenciaColaborador = require("../controllers/RecursosHumanos/Asistencia/colaborador/updateAsistenciaColaborador");
 const deleteBoletaDePago = require("../controllers/RecursosHumanos/BoletaDePagos/deleteBoletaDePago");
 const subirBoletas = require("../controllers/RecursosHumanos/BoletaDePagos/subirBoletas");
+const upload = require("../utils/multer");
 
 const router = Router();
 
@@ -70,7 +71,7 @@ router.post("/returnPdf", returnPdf);
 
 router.patch("/patchBusiness", updateBusinessPartial);
 router.patch("/patchCotizacion", updateCotizacionPartial);
-router.patch("/patchEmployee", updateEmployeePartial);
+router.patch("/patchEmployee", upload.single("photo"), updateEmployeePartial);
 router.patch("/patchClient", updateClient);
 router.patch("/patchContract", putContracts);
 router.patch("/patchPlantillaDeContrato", putPlantillaDeContrato);

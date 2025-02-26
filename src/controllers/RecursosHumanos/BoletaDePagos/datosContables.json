@@ -365,6 +365,181 @@
         "tipo": "INDEMNIZACIONES"
     },
     {
+        "codigoPlame": "0600",
+        "concepto": "APORTACIONES DEL TRABAJADOR / PENSIONISTA",
+        "tipo": "APORTACIONES DEL TRABJADORES / PENSIONISTA"
+    },
+    {
+        "codigoPlame": "0601",
+        "concepto": "SISTEMA PRIVADO DE PENSIONES - COMISIÓN PORCENTUAL",
+        "tipo": "APORTACIONES DEL TRABJADORES / PENSIONISTA"
+    },
+    {
+        "codigoPlame": "0602",
+        "concepto": "CONAFOVICER",
+        "tipo": "APORTACIONES DEL TRABJADORES / PENSIONISTA"
+    },
+    {
+        "codigoPlame": "0603",
+        "concepto": "CONTRIBUCIÓN SOLIDARIA PARA LA ASISTENCIA PREVISIONAL",
+        "tipo": "APORTACIONES DEL TRABJADORES / PENSIONISTA"
+    },
+    {
+        "codigoPlame": "0604",
+        "concepto": "ESSALUD +VIDA",
+        "tipo": "APORTACIONES DEL TRABJADORES / PENSIONISTA"
+    },
+    {
+        "codigoPlame": "0605",
+        "concepto": "RENTA QUINTA CATEGORÍA RETENCIONES",
+        "tipo": "APORTACIONES DEL TRABJADORES / PENSIONISTA"
+    },
+    {
+        "codigoPlame": "0606",
+        "concepto": "SISTEMA PRIVADO DE PENSIONES - PRIMA DE SEGURO",
+        "tipo": "APORTACIONES DEL TRABJADORES / PENSIONISTA"
+    },
+    {
+        "codigoPlame": "0607",
+        "concepto": "SISTEMA NACIONAL DE PENSIONES - D.L.19990",
+        "tipo": "APORTACIONES DEL TRABJADORES / PENSIONISTA"
+    },
+    {
+        "codigoPlame": "0608",
+        "concepto": "SISTEMA PRIVADO DE PENSIONES - APORTACIÓN OBLIGATORIA",
+        "tipo": "APORTACIONES DEL TRABJADORES / PENSIONISTA"
+    },
+    {
+        "codigoPlame": "0609",
+        "concepto": "SISTEMA PRIVADO DE PENSIONES - APORTACIÓN VOLUNTARIA",
+        "tipo": "APORTACIONES DEL TRABJADORES / PENSIONISTA"
+    },
+    {
+        "codigoPlame": "0610",
+        "concepto": "ESSALUD - SEGURO REGULAR - PENSIONISTA",
+        "tipo": "APORTACIONES DEL TRABJADORES / PENSIONISTA"
+    },
+    {
+        "codigoPlame": "0611",
+        "concepto": "OTROS APORTACIONES DEL TRABAJADOR / PENSIONISTA",
+        "tipo": "APORTACIONES DEL TRABJADORES / PENSIONISTA"
+    },
+    {
+        "codigoPlame": "0612",
+        "concepto": "SISTEMA NACIONAL DE PENSIONES - ASEGURA TU PENSIÓN",
+        "tipo": "APORTACIONES DEL TRABJADORES / PENSIONISTA"
+    },
+    {
+        "codigoPlame": "0613",
+        "concepto": "RÉGIMEN PENSIONARIO - D.L. 20530",
+        "tipo": "APORTACIONES DEL TRABJADORES / PENSIONISTA"
+    },
+    {
+        "codigoPlame": "0700",
+        "concepto": "DESCUENTOS AL TRABAJADOR",
+        "tipo": "DESCUENTOS AL TRABAJADOR"
+    },
+    {
+        "codigoPlame": "0701",
+        "concepto": "ADELANTO",
+        "tipo": "DESCUENTOS AL TRABAJADOR"
+    },
+    {
+        "codigoPlame": "0702",
+        "concepto": "CUOTA SINDICAL",
+        "tipo": "DESCUENTOS AL TRABAJADOR"
+    },
+    {
+        "codigoPlame": "0703",
+        "concepto": "DESCUENTO AUTORIZADO U ORDENADO POR MANDATO JUDICIAL",
+        "tipo": "DESCUENTOS AL TRABAJADOR"
+    },
+    {
+        "codigoPlame": "0704",
+        "concepto": "TARDANZAS",
+        "tipo": "DESCUENTOS AL TRABAJADOR"
+    },
+    {
+        "codigoPlame": "0705",
+        "concepto": "INASISTENCIAS",
+        "tipo": "DESCUENTOS AL TRABAJADOR"
+    },
+    {
+        "codigoPlame": "0706",
+        "concepto": "OTROS DESCUENTOS NO DEDUCIBLES DE LA BASE IMPONIBLE ",
+        "tipo": "DESCUENTOS AL TRABAJADOR"
+    },
+    {
+        "codigoPlame": "0707",
+        "concepto": "OTROS DESCUENTOS DEDUCIBLES DE LA BASE IMPONIBLE ",
+        "tipo": "DESCUENTOS AL TRABAJADOR"
+    },
+    {
+        "codigoPlame": "0800",
+        "concepto": "APORTACIONES DE CARGO DEL EMPLEADOR",
+        "tipo": "APORTACIONES DE CARGO DEL EMPLEADOR"
+    },
+    {
+        "codigoPlame": "0801",
+        "concepto": "SISTEMA PRIVADO DE PENSIONES - APORTACIÓN VOLUNTARIA",
+        "tipo": "APORTACIONES DE CARGO DEL EMPLEADOR"
+    },
+    {
+        "codigoPlame": "0802",
+        "concepto": "FONDO DE DERECHOS SOCIALES DEL ARTISTA",
+        "tipo": "APORTACIONES DE CARGO DEL EMPLEADOR"
+    },
+    {
+        "codigoPlame": "0803",
+        "concepto": "PÓLIZA DE SEGURO - D. LEG. 688",
+        "tipo": "APORTACIONES DE CARGO DEL EMPLEADOR"
+    },
+    {
+        "codigoPlame": "0804",
+        "concepto": "ESSALUD (SEGURO REGULAR, CBBSP, AGRARIO/ACUICULTOR) - TRABAJADOR",
+        "tipo": "APORTACIONES DE CARGO DEL EMPLEADOR"
+    },
+    {
+        "codigoPlame": "0805",
+        "concepto": "PENSIONES – SEGURO COMPLEMENTARIO DE TRABAJO DE RIESGO",
+        "tipo": "APORTACIONES DE CARGO DEL EMPLEADOR"
+    },
+    {
+        "codigoPlame": "0806",
+        "concepto": "ESSALUD – SEGURO COMPLEMENTARIO DE TRABAJO DE RIESGO",
+        "tipo": "APORTACIONES DE CARGO DEL EMPLEADOR"
+    },
+    {
+        "codigoPlame": "0807",
+        "concepto": "SENATI",
+        "tipo": "APORTACIONES DE CARGO DEL EMPLEADOR"
+    },
+    {
+        "codigoPlame": "0808",
+        "concepto": "IMPUESTO EXTRAORDINARIO DE SOLIDARIDAD",
+        "tipo": "APORTACIONES DE CARGO DEL EMPLEADOR"
+    },
+    {
+        "codigoPlame": "0809",
+        "concepto": "OTRAS APORTACIONES DE CARGO DEL EMPLEADOR",
+        "tipo": "APORTACIONES DE CARGO DEL EMPLEADOR"
+    },
+    {
+        "codigoPlame": "0810",
+        "concepto": "EPS - SEGURO COMPLEMENTARIO DE TRABAJO DE RIESGO",
+        "tipo": "APORTACIONES DE CARGO DEL EMPLEADOR"
+    },
+    {
+        "codigoPlame": "0811",
+        "concepto": "SEGURO INTEGRAL DE SALUD - SIS",
+        "tipo": "APORTACIONES DE CARGO DEL EMPLEADOR"
+    },
+    {
+        "codigoPlame": "0814",
+        "concepto": "COMPAÑÍA SEGURO - SCTR",
+        "tipo": "APORTACIONES DE CARGO DEL EMPLEADOR"
+    },
+    {
         "codigoPlame": "0900",
         "concepto": "CONCEPTOS VARIOS",
         "tipo": "CONCEPTOS VARIOS"
@@ -808,175 +983,5 @@
         "codigoPlame": "2041",
         "concepto": "AGUINALDOS DE JULIO Y DICIEMBRE – LEY 29351",
         "tipo": "RÉGIMEN LABORAL PÚBLICO"
-    },
-    {
-        "codigoPlame": "0600",
-        "concepto": "APORTACIONES DEL TRABAJADOR / PENSIONISTA",
-        "tipo": "APORTACIONES DEL TRABJADORES / PENSIONISTA"
-    },
-    {
-        "codigoPlame": "0601",
-        "concepto": "SISTEMA PRIVADO DE PENSIONES - COMISIÓN PORCENTUAL",
-        "tipo": "APORTACIONES DEL TRABJADORES / PENSIONISTA"
-    },
-    {
-        "codigoPlame": "0602",
-        "concepto": "CONAFOVICER",
-        "tipo": "APORTACIONES DEL TRABJADORES / PENSIONISTA"
-    },
-    {
-        "codigoPlame": "0603",
-        "concepto": "CONTRIBUCIÓN SOLIDARIA PARA LA ASISTENCIA PREVISIONAL",
-        "tipo": "APORTACIONES DEL TRABJADORES / PENSIONISTA"
-    },
-    {
-        "codigoPlame": "0604",
-        "concepto": "ESSALUD +VIDA",
-        "tipo": "APORTACIONES DEL TRABJADORES / PENSIONISTA"
-    },
-    {
-        "codigoPlame": "0605",
-        "concepto": "RENTA QUINTA CATEGORÍA RETENCIONES",
-        "tipo": "APORTACIONES DEL TRABJADORES / PENSIONISTA"
-    },
-    {
-        "codigoPlame": "0606",
-        "concepto": "SISTEMA PRIVADO DE PENSIONES - PRIMA DE SEGURO",
-        "tipo": "APORTACIONES DEL TRABJADORES / PENSIONISTA"
-    },
-    {
-        "codigoPlame": "0607",
-        "concepto": "SISTEMA NACIONAL DE PENSIONES - D.L.19990",
-        "tipo": "APORTACIONES DEL TRABJADORES / PENSIONISTA"
-    },
-    {
-        "codigoPlame": "0608",
-        "concepto": "SISTEMA PRIVADO DE PENSIONES - APORTACIÓN OBLIGATORIA",
-        "tipo": "APORTACIONES DEL TRABJADORES / PENSIONISTA"
-    },
-    {
-        "codigoPlame": "0609",
-        "concepto": "SISTEMA PRIVADO DE PENSIONES - APORTACIÓN VOLUNTARIA",
-        "tipo": "APORTACIONES DEL TRABJADORES / PENSIONISTA"
-    },
-    {
-        "codigoPlame": "0610",
-        "concepto": "ESSALUD - SEGURO REGULAR - PENSIONISTA",
-        "tipo": "APORTACIONES DEL TRABJADORES / PENSIONISTA"
-    },
-    {
-        "codigoPlame": "0611",
-        "concepto": "OTROS APORTACIONES DEL TRABAJADOR / PENSIONISTA",
-        "tipo": "APORTACIONES DEL TRABJADORES / PENSIONISTA"
-    },
-    {
-        "codigoPlame": "0612",
-        "concepto": "SISTEMA NACIONAL DE PENSIONES - ASEGURA TU PENSIÓN",
-        "tipo": "APORTACIONES DEL TRABJADORES / PENSIONISTA"
-    },
-    {
-        "codigoPlame": "0613",
-        "concepto": "RÉGIMEN PENSIONARIO - D.L. 20530",
-        "tipo": "APORTACIONES DEL TRABJADORES / PENSIONISTA"
-    },
-    {
-        "codigoPlame": "0700",
-        "concepto": "DESCUENTOS AL TRABAJADOR",
-        "tipo": "DESCUENTOS AL TRABAJADOR"
-    },
-    {
-        "codigoPlame": "0701",
-        "concepto": "ADELANTO",
-        "tipo": "DESCUENTOS AL TRABAJADOR"
-    },
-    {
-        "codigoPlame": "0702",
-        "concepto": "CUOTA SINDICAL",
-        "tipo": "DESCUENTOS AL TRABAJADOR"
-    },
-    {
-        "codigoPlame": "0703",
-        "concepto": "DESCUENTO AUTORIZADO U ORDENADO POR MANDATO JUDICIAL",
-        "tipo": "DESCUENTOS AL TRABAJADOR"
-    },
-    {
-        "codigoPlame": "0704",
-        "concepto": "TARDANZAS",
-        "tipo": "DESCUENTOS AL TRABAJADOR"
-    },
-    {
-        "codigoPlame": "0705",
-        "concepto": "INASISTENCIAS",
-        "tipo": "DESCUENTOS AL TRABAJADOR"
-    },
-    {
-        "codigoPlame": "0706",
-        "concepto": "OTROS DESCUENTOS NO DEDUCIBLES DE LA BASE IMPONIBLE ",
-        "tipo": "DESCUENTOS AL TRABAJADOR"
-    },
-    {
-        "codigoPlame": "0707",
-        "concepto": "OTROS DESCUENTOS DEDUCIBLES DE LA BASE IMPONIBLE ",
-        "tipo": "DESCUENTOS AL TRABAJADOR"
-    },
-    {
-        "codigoPlame": "0800",
-        "concepto": "APORTACIONES DE CARGO DEL EMPLEADOR",
-        "tipo": "APORTACIONES DE CARGO DEL EMPLEADOR"
-    },
-    {
-        "codigoPlame": "0801",
-        "concepto": "SISTEMA PRIVADO DE PENSIONES - APORTACIÓN VOLUNTARIA",
-        "tipo": "APORTACIONES DE CARGO DEL EMPLEADOR"
-    },
-    {
-        "codigoPlame": "0802",
-        "concepto": "FONDO DE DERECHOS SOCIALES DEL ARTISTA",
-        "tipo": "APORTACIONES DE CARGO DEL EMPLEADOR"
-    },
-    {
-        "codigoPlame": "0803",
-        "concepto": "PÓLIZA DE SEGURO - D. LEG. 688",
-        "tipo": "APORTACIONES DE CARGO DEL EMPLEADOR"
-    },
-    {
-        "codigoPlame": "0804",
-        "concepto": "ESSALUD (SEGURO REGULAR, CBBSP, AGRARIO/ACUICULTOR) - TRABAJADOR",
-        "tipo": "APORTACIONES DE CARGO DEL EMPLEADOR"
-    },
-    {
-        "codigoPlame": "0805",
-        "concepto": "PENSIONES – SEGURO COMPLEMENTARIO DE TRABAJO DE RIESGO",
-        "tipo": "APORTACIONES DE CARGO DEL EMPLEADOR"
-    },
-    {
-        "codigoPlame": "0806",
-        "concepto": "ESSALUD – SEGURO COMPLEMENTARIO DE TRABAJO DE RIESGO",
-        "tipo": "APORTACIONES DE CARGO DEL EMPLEADOR"
-    },
-    {
-        "codigoPlame": "0807",
-        "concepto": "SENATI",
-        "tipo": "APORTACIONES DE CARGO DEL EMPLEADOR"
-    },
-    {
-        "codigoPlame": "0808",
-        "concepto": "IMPUESTO EXTRAORDINARIO DE SOLIDARIDAD",
-        "tipo": "APORTACIONES DE CARGO DEL EMPLEADOR"
-    },
-    {
-        "codigoPlame": "0809",
-        "concepto": "OTRAS APORTACIONES DE CARGO DEL EMPLEADOR",
-        "tipo": "APORTACIONES DE CARGO DEL EMPLEADOR"
-    },
-    {
-        "codigoPlame": "0810",
-        "concepto": "EPS - SEGURO COMPLEMENTARIO DE TRABAJO DE RIESGO",
-        "tipo": "APORTACIONES DE CARGO DEL EMPLEADOR"
-    },
-    {
-        "codigoPlame": "0811",
-        "concepto": "SEGURO INTEGRAL DE SALUD - SIS",
-        "tipo": "APORTACIONES DE CARGO DEL EMPLEADOR"
     }
 ]

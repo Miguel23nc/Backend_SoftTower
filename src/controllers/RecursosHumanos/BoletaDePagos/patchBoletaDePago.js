@@ -17,6 +17,8 @@ const patchBoleDePago = async (req, res) => {
     aportacionesDelEmpleador,
   } = req.body;
   try {
+    console.log("colaborador", colaborador);
+    
     const boletaDePago = await BoletaDePagos.findById(_id);
 
     if (!boletaDePago) {

@@ -1,6 +1,7 @@
 const Business = require("../../models/Business");
 const Employee = require("../../models/Employees/Employee");
 const { hashPassword } = require("../../utils/bcrypt");
+const { uploadImage } = require("../../utils/cloudinary");
 
 const registerEmployee = async (req, res) => {
   try {
@@ -31,7 +32,8 @@ const registerEmployee = async (req, res) => {
       regimenPension,
     } = req.body;
 
-    // Hash the password
+    console.log("photo", photo);
+
     const hashedPassword = await hashPassword(password);
     const findEmployee = await Employee.findOne({ documentNumber });
     if (findEmployee) {
@@ -46,6 +48,13 @@ const registerEmployee = async (req, res) => {
 
     if (!findBusiness) {
       return res.status(404).json({ message: "Empresa no encontrada" });
+    }
+    if (typeof photo !== "file") {
+      return res.status(400).json({ message: "Por favor suba una foto" });
+    }
+    const pathPhoto = await uploadImage(photo, "TOWER/IMAGES");
+    if (!pathPhoto) {
+      return res.status(500).json({ message: "Error al subir la foto" });
     }
     const newEmployee = new Employee({
       name,
@@ -66,7 +75,7 @@ const registerEmployee = async (req, res) => {
       sueldo,
       user,
       password: hashedPassword,
-      photo,
+      photo: pathPhoto,
       modules,
       business,
       sede,

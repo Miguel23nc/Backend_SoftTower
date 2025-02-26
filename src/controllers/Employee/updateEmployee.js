@@ -1,5 +1,7 @@
 const Employee = require("../../models/Employees/Employee");
 const { hashPassword } = require("../../utils/bcrypt");
+const { deleteImage } = require("../../utils/cloudinary");
+const upload = require("../../utils/multer");
 
 const updateEmployeePartial = async (req, res) => {
   const {
@@ -27,11 +29,11 @@ const updateEmployeePartial = async (req, res) => {
     business,
     sede,
   } = req.body;
+  console.log("req.body", req.body);
+  console.log("req.file", req.file);
 
   try {
     const userFound = await Employee.findById(_id);
-    console.log(userFound);
-
     if (!userFound) {
       return res.status(404).json({ message: "Usuario no encontrado" });
     }
@@ -60,6 +62,21 @@ const updateEmployeePartial = async (req, res) => {
 
     if (password) {
       userFound.password = await hashPassword(password);
+    }
+    if (req.file) {
+      const pathPhoto = await uploadImage(req.file.buffer, "TOWER/IMAGES");
+      console.log("pathPhoto", pathPhoto);
+
+      if (!pathPhoto) {
+        return res.status(500).json({ message: "Error al subir la foto" });
+      }
+      const findPhotoInitial = userFound.photo;
+      console.log("findPhotoInitial", findPhotoInitial);
+
+      if (findPhotoInitial) {
+        await deleteImage(findPhotoInitial);
+      }
+      userFound.photo = pathPhoto;
     }
 
     await userFound.save();

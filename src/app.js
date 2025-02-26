@@ -12,7 +12,8 @@ app.use(morgan("dev"));
 app.use(bodyParser.json());
 app.use(
   cors({
-    origin: process.env.FRONTEND_URL,
+    origin: "*",
+    allowedHeaders: "Content-Type,Authorization",
     credentials: true,
   })
 );
