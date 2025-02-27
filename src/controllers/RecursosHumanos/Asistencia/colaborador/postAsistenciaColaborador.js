@@ -1,3 +1,4 @@
+const Employee = require("../../../../models/Employees/Employee");
 const AsistenciaColaborador = require("../../../../models/RecursosHumanos/AsistenciaColaborador");
 
 const postAsistenciaColaborador = async (req, res) => {
@@ -10,19 +11,35 @@ const postAsistenciaColaborador = async (req, res) => {
       inicioAlmuerzo,
       finAlmuerzo,
       estado,
+      dni,
     } = req.body;
     console.log("req.body", req.body);
 
-    if (!colaborador || !fecha) {
+    if (!fecha) {
+      return res.status(400).json({ message: "La Fecha es obligatoria" });
+    }
+    if (!colaborador && !dni) {
       return res
         .status(400)
-        .json({ message: "Colaborador y fecha son obligatorios" });
+        .json({ message: "El colaborador o el dni es obligatorio" });
     }
 
-    let asistenciaExistente = await AsistenciaColaborador.findOne({
-      colaborador,
-      fecha: fecha,
-    });
+    let asistenciaExistente;
+    if (colaborador) {
+      asistenciaExistente = await AsistenciaColaborador.findOne({
+        colaborador,
+        fecha: fecha,
+      });
+    }
+    if (dni) {
+      const findColaborador = await Employee.findOne({
+        documentNumber: dni,
+      });
+      asistenciaExistente = await AsistenciaColaborador.findOne({
+        colaborador: findColaborador._id,
+        fecha: fecha,
+      });
+    }
 
     if (!asistenciaExistente && !ingreso) {
       return res.status(400).json({
