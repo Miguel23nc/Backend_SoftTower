@@ -71,7 +71,7 @@ router.post("/returnPdf", returnPdf);
 
 router.patch("/patchBusiness", updateBusinessPartial);
 router.patch("/patchCotizacion", updateCotizacionPartial);
-router.patch("/patchEmployee", upload.single("photo"), updateEmployeePartial);
+router.patch("/patchEmployee", updateEmployeePartial);
 router.patch("/patchClient", updateClient);
 router.patch("/patchContract", putContracts);
 router.patch("/patchPlantillaDeContrato", putPlantillaDeContrato);
