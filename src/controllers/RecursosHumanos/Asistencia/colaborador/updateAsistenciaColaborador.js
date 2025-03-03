@@ -44,10 +44,10 @@ const updateAsistenciaColaborador = async (req, res) => {
     await findAsistenciaColaborador.save();
 
     res.status(200).json({
-      message: "AsistenciaColaborador actualizada",
+      message: "Asistencia del colaborador actualizada",
     });
   } catch (error) {
-    res.status(400).json(error);
+    return res.status(500).json({ message: error.message });
   }
 };
 module.exports = updateAsistenciaColaborador;

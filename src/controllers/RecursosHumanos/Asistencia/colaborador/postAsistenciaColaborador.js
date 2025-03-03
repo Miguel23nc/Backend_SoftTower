@@ -68,11 +68,13 @@ const postAsistenciaColaborador = async (req, res) => {
     });
 
     await asistencia.save();
-    return res.status(201).json({
+    return res.status(200).json({
       message: "Asistencia creada correctamente",
       asistencia,
     });
   } catch (error) {
+    console.log("error", error);
+
     return res.status(500).json({ message: error.message });
   }
 };

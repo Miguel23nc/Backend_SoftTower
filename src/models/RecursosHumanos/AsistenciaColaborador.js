@@ -26,7 +26,7 @@ const asistenciaColaboradorSchema = new Schema({
   },
   minTarde: {
     type: Number,
-    default: 0, // Evita valores `undefined`
+    default: 0, 
   },
   minExtras: {
     type: Number,

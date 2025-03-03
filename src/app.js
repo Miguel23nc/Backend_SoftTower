@@ -8,6 +8,7 @@ const fileUpload = require("express-fileupload");
 const app = server();
 const allowedOrigins = [
   "https://back-up-tower.vercel.app", // 🌐 Frontend Web
+  "http://localhost:5173", // 🌐 Frontend Webr
 ];
 
 app.use(fileUpload());
