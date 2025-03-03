@@ -13,7 +13,7 @@ const postAsistenciaColaborador = async (req, res) => {
       estado,
       dni,
     } = req.body;
-    console.log("req.body", req.body);
+    console.log("📩 req.body recibido:", req.body);
 
     if (!fecha) {
       return res.status(400).json({ message: "La Fecha es obligatoria" });
@@ -21,23 +21,29 @@ const postAsistenciaColaborador = async (req, res) => {
     if (!colaborador && !dni) {
       return res
         .status(400)
-        .json({ message: "El colaborador o el dni es obligatorio" });
+        .json({ message: "El colaborador o el DNI es obligatorio" });
     }
 
     let asistenciaExistente;
+    let findColaborador = null;
+
     if (colaborador) {
       asistenciaExistente = await AsistenciaColaborador.findOne({
         colaborador,
-        fecha: fecha,
+        fecha,
       });
-    }
-    if (dni) {
-      const findColaborador = await Employee.findOne({
-        documentNumber: dni,
-      });
+    } else if (dni) {
+      findColaborador = await Employee.findOne({ documentNumber: dni });
+
+      if (!findColaborador) {
+        return res
+          .status(404)
+          .json({ message: "No se encontró un colaborador con este DNI" });
+      }
+
       asistenciaExistente = await AsistenciaColaborador.findOne({
         colaborador: findColaborador._id,
-        fecha: fecha,
+        fecha,
       });
     }
 
@@ -46,19 +52,15 @@ const postAsistenciaColaborador = async (req, res) => {
         message: "Debe registrar el ingreso antes de marcar otros datos.",
       });
     }
-    const findAsistencia = await AsistenciaColaborador.findOne({
-      colaborador,
-      fecha: fecha,
-    });
 
-    if (findAsistencia) {
+    if (asistenciaExistente) {
       return res.status(400).json({
         message: "Ya existe una asistencia para este colaborador en esta fecha",
       });
     }
 
     const asistencia = new AsistenciaColaborador({
-      colaborador,
+      colaborador: colaborador || findColaborador._id, // ✅ Asegura que siempre haya un colaborador
       fecha,
       ingreso,
       salida,
@@ -73,9 +75,10 @@ const postAsistenciaColaborador = async (req, res) => {
       asistencia,
     });
   } catch (error) {
-    console.log("error", error);
-
-    return res.status(500).json({ message: error.message });
+    console.error("❌ Error en postAsistenciaColaborador:", error);
+    return res
+      .status(500)
+      .json({ message: error.message || "Error inesperado en el servidor." });
   }
 };
 

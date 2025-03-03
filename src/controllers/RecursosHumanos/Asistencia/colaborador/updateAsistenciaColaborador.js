@@ -1,3 +1,4 @@
+const Employee = require("../../../../models/Employees/Employee");
 const AsistenciaColaborador = require("../../../../models/RecursosHumanos/AsistenciaColaborador");
 
 const updateAsistenciaColaborador = async (req, res) => {
