@@ -4,7 +4,7 @@ const getBoletaDePagos = async (req, res) => {
   try {
     const boleta = await BoletaDePagos.find().populate(
       "colaborador",
-      "business name lastname email documentNumber documentType regimenPension dateStart"
+      "business type name lastname email documentNumber documentType regimenPension dateStart"
     );
 
     if (!boleta || boleta.length === 0) {
