@@ -47,7 +47,7 @@ const returnPdf = require("../controllers/RecursosHumanos/Asistencia/colaborador
 const updateAsistenciaColaborador = require("../controllers/RecursosHumanos/Asistencia/colaborador/updateAsistenciaColaborador");
 const deleteBoletaDePago = require("../controllers/RecursosHumanos/BoletaDePagos/deleteBoletaDePago");
 const subirBoletas = require("../controllers/RecursosHumanos/BoletaDePagos/subirBoletas");
-const upload = require("../utils/multer");
+const EliminarDocumento = require("../controllers/RecursosHumanos/BoletaDePagos/eliminarDocumento");
 
 const router = Router();
 
@@ -85,6 +85,7 @@ router.delete("/deleteCotizacion", deleteCotizacion);
 router.delete("/deleteBusiness", deleteBusiness);
 router.delete("/deletePlantillaContrato", deletePlantillaContrato);
 router.delete("/deleteAsistenciaColaborador", deleteAsistenciaColaborador);
+router.delete("/deleteDocument", EliminarDocumento);
 
 router.get("/recepcionBoleta", recepcionBoleta);
 router.get("/getDatosContables", getDatosContables);

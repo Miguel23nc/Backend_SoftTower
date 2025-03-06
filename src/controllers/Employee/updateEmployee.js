@@ -1,7 +1,7 @@
 const Employee = require("../../models/Employees/Employee");
 const { hashPassword } = require("../../utils/bcrypt");
-const { deleteImage } = require("../../utils/cloudinary");
-const upload = require("../../utils/multer");
+// const { deleteImage } = require("../../utils/cloudinary");
+// const upload = require("../../utils/multer");
 
 const updateEmployeePartial = async (req, res) => {
   const {

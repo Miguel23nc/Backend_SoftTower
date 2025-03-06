@@ -1,7 +1,7 @@
 const Business = require("../../models/Business");
 const Employee = require("../../models/Employees/Employee");
 const { hashPassword } = require("../../utils/bcrypt");
-const { uploadImage } = require("../../utils/cloudinary");
+// const { uploadImage } = require("../../utils/cloudinary");
 
 const registerEmployee = async (req, res) => {
   try {
