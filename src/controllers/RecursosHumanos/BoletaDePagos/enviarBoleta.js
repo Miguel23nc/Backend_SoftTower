@@ -135,6 +135,7 @@ const enviarBoleta = async (req, res) => {
             throw new Error("Boleta no encontrada");
           }
 
+          const pdf = await convertPathToPdf(archivoUrl);
           const mailOptions = {
             from: `Boleta de Pago <${EMAIL_USER}>`,
             to: email,
@@ -142,8 +143,8 @@ const enviarBoleta = async (req, res) => {
             text: "Boleta de Pago",
             attachments: [
               {
-                filename: "Boleta_de_Pago.docx",
-                path: archivoUrl,
+                filename: "Boleta de Pago.pdf",
+                content: pdf,
                 encoding: "base64",
               },
             ],
