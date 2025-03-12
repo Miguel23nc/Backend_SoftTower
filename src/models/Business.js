@@ -10,7 +10,7 @@ const businessSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  address: {
+  domicilioFiscal: {
     type: String,
     required: true,
   },

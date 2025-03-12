@@ -24,7 +24,6 @@ const updateCotizacionPartial = require("../controllers/Cotización/updateCotiza
 const allContracts = require("../controllers/Contracts/allContracts");
 const postContracts = require("../controllers/Contracts/postContracts");
 const putContracts = require("../controllers/Contracts/putContracts");
-const deleteContract = require("../controllers/Contracts/deleteContracts");
 const getBusiness = require("../controllers/RecursosHumanos/Business/getBusiness");
 const deleteBusiness = require("../controllers/RecursosHumanos/Business/deleteBusiness");
 const updateBusinessPartial = require("../controllers/RecursosHumanos/Business/updateBusiness");
@@ -43,11 +42,12 @@ const getDatosContables = require("../controllers/RecursosHumanos/BoletaDePagos/
 const patchBoleDePago = require("../controllers/RecursosHumanos/BoletaDePagos/patchBoletaDePago");
 const enviarBoleta = require("../controllers/RecursosHumanos/BoletaDePagos/enviarBoleta");
 const recepcionBoleta = require("../controllers/RecursosHumanos/BoletaDePagos/recibirBoleta");
-const returnPdf = require("../controllers/RecursosHumanos/Asistencia/colaborador/returnPdf");
 const updateAsistenciaColaborador = require("../controllers/RecursosHumanos/Asistencia/colaborador/updateAsistenciaColaborador");
 const deleteBoletaDePago = require("../controllers/RecursosHumanos/BoletaDePagos/deleteBoletaDePago");
 const subirBoletas = require("../controllers/RecursosHumanos/BoletaDePagos/subirBoletas");
 const EliminarDocumento = require("../controllers/RecursosHumanos/BoletaDePagos/eliminarDocumento");
+const getEmployeeById = require("../controllers/Employee/getEmployeById");
+const getContractById = require("../controllers/Contracts/getContractById");
 
 const router = Router();
 
@@ -67,7 +67,6 @@ router.post("/postBoletaDePagos", postBoletaDePagos);
 router.post("/postDatosContables", postDatosContables);
 router.post("/enviarBoletasDePago", enviarBoleta);
 router.post("/boletajson", subirBoletas);
-router.post("/returnPdf", returnPdf);
 
 router.patch("/patchBusiness", updateBusinessPartial);
 router.patch("/patchCotizacion", updateCotizacionPartial);
@@ -79,7 +78,6 @@ router.patch("/patchAsistenciaColaborador", updateAsistenciaColaborador);
 router.patch("/patchBoletaDePago", patchBoleDePago);
 
 router.delete("/deleteBoletaDePago", deleteBoletaDePago);
-router.delete("/deleteContract", deleteContract);
 router.delete("/deleteClient", deleteClient);
 router.delete("/deleteCotizacion", deleteCotizacion);
 router.delete("/deleteBusiness", deleteBusiness);
@@ -93,6 +91,7 @@ router.get("/getBoletaDePagos", getBoletaDePagos);
 router.get("/getAllAsistenciaColaborador", getAllAsistenciaColaborador);
 router.get("/getPlantillasDeContrato", getAllPlantillasDeContrato);
 router.get("/allContracts", allContracts);
+router.get("/contract/:id", getContractById);
 router.get("/getCotizaciones", getCotizaciones);
 router.get("/getClients", getClients);
 router.get("/getBusiness", getBusiness);
@@ -101,6 +100,7 @@ router.get("/getSubModules", getSubModules);
 router.get("/getPermissions", getPermissions);
 router.get("/auth/verify", verifyToken);
 router.get("/employee", getEmployee);
+router.get("/employee/:id", getEmployeeById);
 router.get("/ruc", consulApi);
 
 module.exports = router;

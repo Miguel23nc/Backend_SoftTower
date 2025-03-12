@@ -1,8 +1,16 @@
 const Contract = require("../../models/Contracts");
 
 const putContracts = async (req, res) => {
-  const { _id, typeContract, state, dateStart, dateEnd, empresa, colaborator } =
-    req.body;
+  const {
+    _id,
+    typeContract,
+    state,
+    dateStart,
+    dateEnd,
+    colaborador,
+    codigoSpp,
+    regimenPension,
+  } = req.body;
 
   try {
     const updatedContract = await Contract.findById(_id);
@@ -12,19 +20,11 @@ const putContracts = async (req, res) => {
     if (typeContract) updatedContract.typeContract = typeContract;
     if (dateStart) updatedContract.dateStart = dateStart;
     if (dateEnd) updatedContract.dateEnd = dateEnd;
-    if (empresa) updatedContract.empresa = empresa;
-    if (colaborator) updatedContract.colaborator = colaborator;
+    if (colaborador) updatedContract.colaborador = colaborador;
     if (state) updatedContract.state = state;
-    if (
-      !typeContract &&
-      !state &&
-      !dateStart &&
-      !dateEnd &&
-      !empresa &&
-      !colaborator
-    ) {
-      return res.status(400).json({ message: "No hay Cambios" });
-    }
+    if (codigoSpp) updatedContract.codigoSpp = codigoSpp;
+    if (regimenPension) updatedContract.regimenPension = regimen;
+
     await updatedContract.save({ validateBeforeSave: false });
 
     return res

@@ -2,13 +2,14 @@ const Business = require("../../../models/Business");
 
 const createBusiness = async (req, res) => {
   try {
-    const { ruc, razonSocial, address, logo, representative } = req.body;
+    const { ruc, razonSocial, domicilioFiscal, logo, representative } =
+      req.body;
     console.log("req.body", req.body);
     if (!ruc)
       return res.status(400).json({ message: "El campo ruc es obligatorio" });
     if (!razonSocial)
       res.status(400).json({ message: "El campo razon social es obligatorio" });
-    if (!address)
+    if (!domicilioFiscal)
       return res
         .status(400)
         .json({ message: "El campo dirección es obligatorio" });
@@ -27,7 +28,7 @@ const createBusiness = async (req, res) => {
     const newBusiness = new Business({
       ruc,
       razonSocial,
-      address,
+      domicilioFiscal,
       representative,
       logo,
     });

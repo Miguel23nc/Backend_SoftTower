@@ -28,9 +28,10 @@ const updateEmployeePartial = async (req, res) => {
     phoneNumber,
     business,
     sede,
+    photo,
+    funcion,
   } = req.body;
   console.log("req.body", req.body);
-  console.log("req.file", req.file);
 
   try {
     const userFound = await Employee.findById(_id);
@@ -59,25 +60,13 @@ const updateEmployeePartial = async (req, res) => {
     if (phoneNumber) userFound.phoneNumber = phoneNumber;
     if (business) userFound.business = business;
     if (sede) userFound.sede = sede;
+    if (photo) userFound.photo = photo;
+    if (funcion) userFound.funcion = funcion;
 
     if (password) {
       userFound.password = await hashPassword(password);
     }
-    if (req.file) {
-      const pathPhoto = await uploadImage(req.file.buffer, "TOWER/IMAGES");
-      console.log("pathPhoto", pathPhoto);
 
-      if (!pathPhoto) {
-        return res.status(500).json({ message: "Error al subir la foto" });
-      }
-      const findPhotoInitial = userFound.photo;
-      console.log("findPhotoInitial", findPhotoInitial);
-
-      if (findPhotoInitial) {
-        await deleteImage(findPhotoInitial);
-      }
-      userFound.photo = pathPhoto;
-    }
 
     await userFound.save();
 

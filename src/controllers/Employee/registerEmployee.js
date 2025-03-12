@@ -15,6 +15,7 @@ const registerEmployee = async (req, res) => {
       dateOfBirth,
       genre,
       civilStatus,
+      funcion,
       phone,
       telephone,
       email,
@@ -49,13 +50,7 @@ const registerEmployee = async (req, res) => {
     if (!findBusiness) {
       return res.status(404).json({ message: "Empresa no encontrada" });
     }
-    // if (typeof photo !== "file") {
-    //   return res.status(400).json({ message: "Por favor suba una foto" });
-    // }
-    // const pathPhoto = await uploadImage(photo, "TOWER/IMAGES");
-    // if (!pathPhoto) {
-    //   return res.status(500).json({ message: "Error al subir la foto" });
-    // }
+
     const newEmployee = new Employee({
       name,
       lastname,
@@ -75,9 +70,10 @@ const registerEmployee = async (req, res) => {
       sueldo,
       user,
       password: hashedPassword,
-      // photo: pathPhoto,
+      photo,
       modules,
       business,
+      funcion,
       sede,
       dateStart,
       regimenPension,

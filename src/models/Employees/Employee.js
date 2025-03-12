@@ -23,7 +23,7 @@ const employeeSchema = mongoose.Schema(
     type: {
       type: String,
       required: true,
-      enum: ["VISITANTE", "COLABORADOR", "GERENTE"],
+      enum: ["VISITANTE", "COLABORADOR"],
       default: "COLABORADOR",
     },
     state: {
@@ -56,7 +56,14 @@ const employeeSchema = mongoose.Schema(
       unique: true,
     },
     location: locationSchema,
+    datestart: {
+      type: String,
+    },
     charge: {
+      type: String,
+      required: true,
+    },
+    funcion: {
       type: String,
       required: true,
     },
@@ -85,12 +92,7 @@ const employeeSchema = mongoose.Schema(
       type: String,
       required: true,
     },
-    regimenPension: {
-      type: String,
-    },
-    dateStart: {
-      type: String,
-    },
+
     modules: [
       {
         name: {

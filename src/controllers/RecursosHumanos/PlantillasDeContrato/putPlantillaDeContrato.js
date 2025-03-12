@@ -8,13 +8,13 @@ const putPlantillaDeContrato = async (req, res) => {
     if (!updatedContract) {
       return res.status(404).json({ message: "Contrato no encontrado" });
     }
+    if (!state && !tipoContrato && !archivo) {
+      return res.status(400).json({ message: "No hay Cambios" });
+    }
     if (tipoContrato) updatedContract.tipoContrato = tipoContrato;
     if (state) updatedContract.state = state;
     if (archivo) updatedContract.archivo = archivo;
 
-    if (!state && !tipoContrato && !archivo) {
-      return res.status(400).json({ message: "No hay Cambios" });
-    }
     await updatedContract.save();
 
     return res

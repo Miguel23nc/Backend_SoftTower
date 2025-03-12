@@ -1,7 +1,8 @@
 const Business = require("../../../models/Business");
 
 const updateBusinessPartial = async (req, res) => {
-  const { _id, ruc, razonSocial, address, representative, logo } = req.body;
+  const { _id, ruc, razonSocial, domicilioFiscal, representative, logo } =
+    req.body;
 
   try {
     const businessFound = await Business.findById(_id);
@@ -12,7 +13,7 @@ const updateBusinessPartial = async (req, res) => {
 
     if (ruc) businessFound.ruc = ruc;
     if (razonSocial) businessFound.razonSocial = razonSocial;
-    if (address) businessFound.address = address;
+    if (domicilioFiscal) businessFound.domicilioFiscal = domicilioFiscal;
     if (representative) businessFound.representative = representative;
     if (logo) businessFound.logo = logo;
 

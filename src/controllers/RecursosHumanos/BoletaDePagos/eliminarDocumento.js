@@ -2,8 +2,6 @@ const { deleteDocument } = require("../../../utils/cloudinary/documents");
 
 const EliminarDocumento = async (req, res) => {
   const { public_id } = req.body;
-  console.log("public_id:", public_id);
-  console.log("req.body:", req.body);
 
   try {
     if (!public_id)
