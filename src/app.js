@@ -7,7 +7,7 @@ const bodyParser = require("body-parser");
 const fileUpload = require("express-fileupload");
 const app = server();
 const allowedOrigins = [
-  "https://back-up-tower.vercel.app", // 🌐 Frontend Web
+  procces.env.FRONTEND_URL ,
   "http://localhost:5173", // 🌐 Frontend Webr
 ];
 
