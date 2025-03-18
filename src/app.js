@@ -6,9 +6,12 @@ const routes = require("./routes/index");
 const bodyParser = require("body-parser");
 const fileUpload = require("express-fileupload");
 const app = server();
+const dotenv = require("dotenv");
+dotenv.config();
+const { FRONTEND_URL } = process.env;
 const allowedOrigins = [
-  procces.env.FRONTEND_URL ,
-  "http://localhost:5173", // 🌐 Frontend Webr
+  FRONTEND_URL?.toString(),
+  "http://localhost:5173", 
 ];
 
 app.use(fileUpload());
@@ -27,7 +30,10 @@ app.use((req, res, next) => {
     res.header("Access-Control-Allow-Origin", "*");
   }
 
-  res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS, PATCH");
+  res.header(
+    "Access-Control-Allow-Methods",
+    "GET, POST, PUT, DELETE, OPTIONS, PATCH"
+  );
   res.header("Access-Control-Allow-Headers", "Content-Type, Authorization");
 
   // Manejar preflight OPTIONS request
