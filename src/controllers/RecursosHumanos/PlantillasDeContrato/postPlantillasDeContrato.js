@@ -16,7 +16,9 @@ const postPlantillasDeContrato = async (req, res) => {
       tipoContrato,
     });
     if (plantillasDeContratoExistente) {
-      return res.status(400).json({ message: "Este tipo de contrato ya existe" });
+      return res
+        .status(400)
+        .json({ message: "Este tipo de contrato ya existe" });
     }
     const plantillasDeContrato = new PlantillasDeContrato({
       state,
@@ -26,12 +28,10 @@ const postPlantillasDeContrato = async (req, res) => {
     await plantillasDeContrato.save();
     return res.status(201).json({ message: "Plantilla de contrato creada" });
   } catch (error) {
-    res
-      .status(400)
-      .json({
-        message: "Error al crear una plantilla de contrato ",
-        error: error.message,
-      });
+    return res.status(500).json({
+      message: "Error al crear una plantilla de contrato ",
+      error: error.message,
+    });
   }
 };
 

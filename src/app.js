@@ -7,12 +7,10 @@ const bodyParser = require("body-parser");
 const fileUpload = require("express-fileupload");
 const app = server();
 const dotenv = require("dotenv");
+const verifyToken = require("./controllers/auth/midellware");
 dotenv.config();
 const { FRONTEND_URL } = process.env;
-const allowedOrigins = [
-  FRONTEND_URL?.toString(),
-  "http://localhost:5173", 
-];
+const allowedOrigins = [FRONTEND_URL?.toString(), "http://localhost:5173"];
 
 app.use(fileUpload());
 app.use(morgan("dev"));
@@ -22,26 +20,22 @@ app.use((req, res, next) => {
   const origin = req.headers.origin;
 
   if (allowedOrigins.includes(origin)) {
-    // 🌐 Permite el Frontend Web con credenciales
-    res.header("Access-Control-Allow-Origin", origin);
-    res.header("Access-Control-Allow-Credentials", "true");
-  } else {
-    // 📱 Permite cualquier otro origen (Móvil) SIN credenciales
-    res.header("Access-Control-Allow-Origin", "*");
+    res.setHeader("Access-Control-Allow-Origin", origin);
+    res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
+    res.setHeader(
+      "Access-Control-Allow-Headers",
+      "Content-Type, Authorization"
+    );
+    res.setHeader("Access-Control-Allow-Credentials", "true");
+
+    if (req.method === "OPTIONS") {
+      return res.sendStatus(200);
+    }
+
+    return next();
   }
 
-  res.header(
-    "Access-Control-Allow-Methods",
-    "GET, POST, PUT, DELETE, OPTIONS, PATCH"
-  );
-  res.header("Access-Control-Allow-Headers", "Content-Type, Authorization");
-
-  // Manejar preflight OPTIONS request
-  if (req.method === "OPTIONS") {
-    return res.sendStatus(200);
-  }
-
-  next();
+  return verifyToken(req, res, next);
 });
 
 app.use(cookieParser());
