@@ -1,39 +1,47 @@
-const jwt = require("jsonwebtoken");
-const Employee = require("../../models/Employees/Employee");
-const { JWT_SECRET, MASTER_TOKEN } = process.env;
+// const jwt = require("jsonwebtoken");
+// const Employee = require("../../models/Employees/Employee");
+// const { JWT_SECRET, MASTER_TOKEN } = process.env;
+// const publicRoutes = ["/api/login", "/api/employee", "/api/auth/login"];
+// const tokenVerify = async (req, res, next) => {
+//   const token = req.cookies.token || req.headers.authorization?.split(" ")[1];
 
-const verifyToken = async (req, res, next) => {
-  const token = req.headers.authorization?.split(" ")[1];
-  const queryToken = req.query.token; // Captura el token en la URL
+//   if (publicRoutes.includes(req.path)) {
+//     return next();
+//   }
 
-  // Si el token de la URL es el token maestro, permite acceso total
-  if (queryToken && queryToken === MASTER_TOKEN) {
-    req.user = { role: "superadmin" }; // Fake user para auditoría
-    return next();
-  }
+//   if (!token) {
+//     return res.status(401).json({ message: "No hay token" });
+//   }
 
-  if (!token) {
-    return res.status(401).json({ message: "No hay token" });
-  }
+//   try {
+//     let decoded;
+//     try {
+//       decoded = jwt.verify(token, JWT_SECRET);
+//     } catch (error) {
+//       decoded = jwt.verify(token, MASTER_TOKEN);
+//       if (decoded.role !== "superadmin") {
+//         return res.status(403).json({ message: "Token inválido" });
+//       }
+//     }
 
-  try {
-    const decoded = jwt.verify(token, JWT_SECRET);
-    const userFound = await Employee.findOne({ email: decoded.email });
+//     if (decoded.role === "superadmin") {
+//       req.user = { role: "superadmin" };
+//       return next();
+//     }
 
-    if (!userFound) {
-      return res.status(401).json({ message: "No se encuentra este usuario" });
-    }
+//     const userFound = await Employee.findOne({ email: decoded.email });
 
-    req.user = userFound.toObject(); // Agrega el usuario a `req`
-    delete req.user.password; // Elimina la contraseña por seguridad
+//     if (!userFound) {
+//       return res.status(401).json({ message: "No se encuentra este usuario" });
+//     }
 
-    next(); // ✅ Permite continuar con la siguiente función en la ruta
-  } catch (err) {
-    if (err.name === "TokenExpiredError") {
-      return res.status(401).json({ message: "Token expirado" });
-    }
-    return res.status(403).json({ message: "Token no válido" });
-  }
-};
+//     req.user = userFound.toObject();
+//     delete req.user.password;
 
-module.exports = verifyToken;
+//     next();
+//   } catch (err) {
+//     return res.status(403).json({ message: "Token no válido o expirado" });
+//   }
+// };
+
+// module.exports = tokenVerify;

@@ -1,30 +1,37 @@
 const { compare } = require("bcrypt");
 const generatetoken = require("../../utils/jwt");
 const Employee = require("../../models/Employees/Employee");
+const generateSupertoken = require("../auth/superToken");
 
 const login = async (req, res) => {
   const { email, password } = req.body;
 
   try {
     if (!email || !password) {
-      return res.status(200).json({ message: "Falta email o password" });
+      return res.status(400).json({ message: "Falta email o password" });
     }
     const user = await Employee.findOne({ email });
 
     if (!user) {
-      return res.status(400).json({ message: "Usuario no encontrado" });
+      return res.status(404).json({ message: "Usuario no encontrado" });
     }
-    const response = await compare(password, user.password);
-    if (!response)
-      return res.status(400).json({ message: "Contraseña incorrecta" });
+    const isMatch = await compare(password, user.password);
+    if (!isMatch) {
+      return res.status(401).json({ message: "Contraseña incorrecta" });
+    }
     const userData = user.toObject();
     delete userData.password;
 
-    const token = generatetoken(userData);
+    let token;
+    if (user.role === "superadmin") {
+      token = generateSupertoken(userData);
+    } else {
+      token = generatetoken(userData);
+    }
     res.cookie("token", token, {
-      httpOnly: true, // Esto asegura que solo el servidor pueda acceder a la cookie
-      secure: true, // Asegura que la cookie solo se envíe por HTTPS
-      sameSite: "None", // Necesario para cookies entre diferentes dominios
+      httpOnly: true,
+      secure: true,
+      sameSite: "None",
     });
     return res.status(200).json({
       data: userData,
