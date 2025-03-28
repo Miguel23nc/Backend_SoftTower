@@ -3,10 +3,19 @@ const AsistenciaColaborador = require("../../../../../models/RecursosHumanos/Asi
 const dayjs = require("dayjs");
 const utc = require("dayjs/plugin/utc");
 const timezone = require("dayjs/plugin/timezone");
+
 dayjs.extend(utc);
 dayjs.extend(timezone);
 
 async function marcarAsistenciaAutomatica() {
+  const hoy = dayjs().tz("America/Lima");
+  const diaSemana = hoy.day(); // 0 = Domingo, 6 = Sábado
+
+  // Si es domingo, salir sin hacer nada
+  if (diaSemana === 0) return;
+
+  const fechaHoy = hoy.format("DD/MM/YYYY");
+
   const defaultData = {
     ingreso: "-",
     salida: "-",
@@ -16,24 +25,32 @@ async function marcarAsistenciaAutomatica() {
     estado: "FALTA",
   };
 
-  const asistenciaAutomaticaData = {
-    ingreso: "08:00 AM",
-    salida: "5:30 PM",
-    inicioAlmuerzo: "1:00 PM",
-    finAlmuerzo: "2:00 PM",
-    minExtras: "0",
-    minTarde: "0",
-    estado: "PRESENTE",
-  };
-  const hoy = dayjs().tz("America/Lima").format("DD/MM/YYYY");
+  const asistenciaAutomaticaData =
+    diaSemana === 6
+      ? {
+          // Sábado
+          ingreso: "08:00 AM",
+          salida: "1:00 PM",
+          minExtras: "0",
+          minTarde: "0",
+          estado: "PRESENTE",
+        }
+      : {
+          // Lunes a viernes
+          ingreso: "08:00 AM",
+          salida: "5:30 PM",
+          inicioAlmuerzo: "1:00 PM",
+          finAlmuerzo: "2:00 PM",
+          minExtras: "0",
+          minTarde: "0",
+          estado: "PRESENTE",
+        };
 
   try {
     const colaboradores = await Employee.find({ state: "ACTIVO" }).lean();
-
     const asistenciasHoy = await AsistenciaColaborador.find({
-      fecha: hoy,
+      fecha: fechaHoy,
     }).lean();
-
     const asistenciaMap = new Map(
       asistenciasHoy.map((a) => [a.colaborador.toString(), a])
     );
@@ -61,7 +78,7 @@ async function marcarAsistenciaAutomatica() {
           insertOne: {
             document: {
               colaborador: empleado._id,
-              fecha: hoy,
+              fecha: fechaHoy,
               ...dataToPost,
             },
           },
