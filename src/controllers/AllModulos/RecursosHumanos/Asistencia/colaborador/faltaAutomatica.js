@@ -1,8 +1,9 @@
-const Employee = require("../../../../../models/Employees/Employee");
-const AsistenciaColaborador = require("../../../../../models/RecursosHumanos/AsistenciaColaborador");
+
 const dayjs = require("dayjs");
 const utc = require("dayjs/plugin/utc");
 const timezone = require("dayjs/plugin/timezone");
+const Employee = require("../../../../../models/Employees/Employee");
+const AsistenciaColaborador = require("../../../../../models/RecursosHumanos/AsistenciaColaborador");
 
 dayjs.extend(utc);
 dayjs.extend(timezone);
