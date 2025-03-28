@@ -48,7 +48,7 @@ async function marcarAsistenciaAutomatica() {
         };
 
   try {
-    const colaboradores = await Employee.find({ state: "ACTIVO" }).lean();
+    const colaboradores = await Employee.find({ state: "ACTIVO" });
     const asistenciasHoy = await AsistenciaColaborador.find({
       fecha: fechaHoy,
     }).lean();
