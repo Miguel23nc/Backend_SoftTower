@@ -1,6 +1,6 @@
-import cloudinary from "./config.js";
+const cloudinary = require("./config.js");
 
-export const uploadImage = (fileBuffer, fileName) => {
+const uploadImage = (fileBuffer, fileName) => {
   return new Promise((resolve, reject) => {
     const uploadStream = cloudinary.uploader.upload_stream(
       { folder: "home/TOWER/IMAGES", public_id: fileName },
@@ -14,7 +14,7 @@ export const uploadImage = (fileBuffer, fileName) => {
   });
 };
 
-export const deleteImage = async (publicId) => {
+const deleteImage = async (publicId) => {
   try {
     const result = await cloudinary.uploader.destroy(publicId);
     return result;
@@ -22,3 +22,5 @@ export const deleteImage = async (publicId) => {
     throw error;
   }
 };
+
+module.exports = { uploadImage, deleteImage };

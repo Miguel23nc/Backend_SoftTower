@@ -9,8 +9,12 @@ const app = server();
 const dotenv = require("dotenv");
 const verifyToken = require("./controllers/auth/midellware");
 dotenv.config();
-const { FRONTEND_URL } = process.env;
-const allowedOrigins = [FRONTEND_URL?.toString(), "http://localhost:5173"];
+const { FRONTEND_URL, FRONTEND2_URL } = process.env;
+const allowedOrigins = [
+  FRONTEND_URL?.toString(),
+  FRONTEND2_URL?.toString(),
+  "http://localhost:5173",
+];
 
 app.use(fileUpload());
 app.use(morgan("dev"));
@@ -21,7 +25,10 @@ app.use((req, res, next) => {
 
   if (allowedOrigins.includes(origin)) {
     res.setHeader("Access-Control-Allow-Origin", origin);
-    res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, PATCH, DELETE");
+    res.setHeader(
+      "Access-Control-Allow-Methods",
+      "GET, POST, PUT, PATCH, DELETE"
+    );
     res.setHeader(
       "Access-Control-Allow-Headers",
       "Content-Type, Authorization"

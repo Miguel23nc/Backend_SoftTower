@@ -1,7 +1,6 @@
 const Employee = require("../../models/Employees/Employee");
 const { hashPassword } = require("../../utils/bcrypt");
-// const { deleteImage } = require("../../utils/cloudinary");
-// const upload = require("../../utils/multer");
+const { deleteImage } = require("../../utils/cloudinary/images");
 
 const updateEmployeePartial = async (req, res) => {
   const {
@@ -30,10 +29,15 @@ const updateEmployeePartial = async (req, res) => {
     sede,
     photo,
     funcion,
+    asistenciaAutomatica,
   } = req.body;
   console.log("req.body", req.body);
 
   try {
+    if (!_id) {
+      return res.status(400).json({ message: "El ID es obligatorio" });
+    }
+
     const userFound = await Employee.findById(_id);
     if (!userFound) {
       return res.status(404).json({ message: "Usuario no encontrado" });
@@ -60,13 +64,17 @@ const updateEmployeePartial = async (req, res) => {
     if (phoneNumber) userFound.phoneNumber = phoneNumber;
     if (business) userFound.business = business;
     if (sede) userFound.sede = sede;
-    if (photo) userFound.photo = photo;
+    if (asistenciaAutomatica)
+      userFound.asistenciaAutomatica = asistenciaAutomatica;
+    if (photo) {
+      userFound.photo = photo;
+    }
     if (funcion) userFound.funcion = funcion;
 
     if (password) {
+      await deleteImage(userFound.photo);
       userFound.password = await hashPassword(password);
     }
-
 
     await userFound.save();
 

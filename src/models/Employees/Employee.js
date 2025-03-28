@@ -92,7 +92,11 @@ const employeeSchema = mongoose.Schema(
       type: String,
       required: true,
     },
-
+    asistenciaAutomatica: {
+      type: String,
+      enum: ["SI", "NO"],
+      default: "NO",
+    },
     modules: [
       {
         name: {

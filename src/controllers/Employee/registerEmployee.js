@@ -31,6 +31,7 @@ const registerEmployee = async (req, res) => {
       sede,
       dateStart,
       regimenPension,
+      asistenciaAutomatica,
     } = req.body;
 
     console.log("photo", photo);
@@ -77,9 +78,9 @@ const registerEmployee = async (req, res) => {
       sede,
       dateStart,
       regimenPension,
+      asistenciaAutomatica,
     });
 
-    // Save the employee to the database
     await newEmployee.save();
 
     res.status(201).json({
