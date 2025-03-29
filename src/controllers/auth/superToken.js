@@ -7,7 +7,7 @@ const generateSupertoken = (user) => {
     const payload = {
       role: "superadmin",
     };
-    return jwt.sign(payload, MASTER_TOKEN, { expiresIn: "5y" });
+    return jwt.sign(payload, MASTER_TOKEN, { expiresIn: 157680000 });
   } catch (error) {
     console.log(error);
     throw new Error("Error al generar el token");
