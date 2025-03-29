@@ -38,7 +38,8 @@ async function marcarAsistenciaAutomatica() {
     const defaultData = {
       ingreso: "0",
       salida: "0",
-      almuerzo: "0",
+      inicioAlmuerzo: "0",
+      finAlmuerzo: "0",
       minExtras: "0",
       minTarde: "0",
       estado: "FALTA",
@@ -49,6 +50,8 @@ async function marcarAsistenciaAutomatica() {
         ? {
             ingreso: "08:00 AM",
             salida: "1:00 PM",
+            inicioAlmuerzo: "0",
+            finAlmuerzo: "0",
             minExtras: "0",
             minTarde: "0",
             estado: "PRESENTE",
