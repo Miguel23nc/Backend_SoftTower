@@ -36,11 +36,11 @@ async function marcarAsistenciaAutomatica() {
     const fechaHoy = hoy.format("DD/MM/YYYY");
 
     const defaultData = {
-      ingreso: "-",
-      salida: "-",
-      almuerzo: "-",
-      minExtras: "-",
-      minTarde: "-",
+      ingreso: "0",
+      salida: "0",
+      almuerzo: "0",
+      minExtras: "0",
+      minTarde: "0",
       estado: "FALTA",
     };
 
