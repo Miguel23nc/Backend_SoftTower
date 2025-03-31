@@ -3,7 +3,7 @@ const jwt = require("jsonwebtoken");
 const { MASTER_TOKEN } = process.env;
 
 const generateSupertoken = (user) => {
-  const expiresIn = 10; // 5 años en segundos
+  const expiresIn = "43800h"; // 5 años en horas
   try {
     console.log("user", user);
 
