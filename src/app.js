@@ -6,8 +6,8 @@ const routes = require("./routes/index");
 const bodyParser = require("body-parser");
 const fileUpload = require("express-fileupload");
 const app = server();
-const dotenv = require("dotenv");
 const verifyToken = require("./controllers/auth/midellware");
+const dotenv = require("dotenv");
 dotenv.config();
 const { FRONTEND_URL, FRONTEND2_URL } = process.env;
 const allowedOrigins = [

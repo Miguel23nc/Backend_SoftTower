@@ -3,11 +3,13 @@ const jwt = require("jsonwebtoken");
 const { MASTER_TOKEN } = process.env;
 
 const generateSupertoken = (user) => {
+  const expiresIn = 10; 
   try {
     const payload = {
-      role: "superadmin",
+      ...user,
     };
-    return jwt.sign(payload, MASTER_TOKEN, { expiresIn: 157680000 });
+    delete payload.password;
+    return jwt.sign(payload, MASTER_TOKEN, { expiresIn: expiresIn });
   } catch (error) {
     console.log(error);
     throw new Error("Error al generar el token");

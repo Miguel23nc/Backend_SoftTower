@@ -2,10 +2,14 @@ const jwt = require("jsonwebtoken");
 const Employee = require("../../models/Employees/Employee");
 const { JWT_SECRET, MASTER_TOKEN } = process.env;
 const publicRoutes = ["/api/login", "/api/employee", "/api/auth/login"];
+
 const tokenVerify = async (req, res, next) => {
-  const token = req.cookies?.token || req.headers?.authorization?.split(" ")[1];
-  console.log("token",token);
-  
+  const authHeader = req.headers.authorization;
+  let token =
+    req.cookies?.token ||
+    (authHeader?.startsWith("Bearer ") ? authHeader.split(" ")[1] : null);
+
+  console.log("Token recibido:", token);
 
   if (publicRoutes.includes(req.path)) {
     return next();
@@ -15,22 +19,28 @@ const tokenVerify = async (req, res, next) => {
     return res.status(401).json({ message: "No hay token" });
   }
 
+  let decoded;
   try {
-    let decoded;
+    // Intentamos verificar con el JWT_SECRET (usuarios normales)
+    decoded = jwt.verify(token, JWT_SECRET);
+  } catch (error) {
     try {
-      decoded = jwt.verify(token, JWT_SECRET);
-    } catch (error) {
+      // Si falla, intentamos con el MASTER_TOKEN (superadmin)
       decoded = jwt.verify(token, MASTER_TOKEN);
       if (decoded.role !== "superadmin") {
         return res.status(403).json({ message: "Token inválido" });
       }
+    } catch (err) {
+      return res.status(403).json({ message: "Token no válido o expirado" });
     }
+  }
 
-    if (decoded.role === "superadmin") {
-      req.user = { role: "superadmin" };
-      return next();
-    }
+  if (decoded.role === "superadmin") {
+    req.user = { role: "superadmin" };
+    return next();
+  }
 
+  try {
     const userFound = await Employee.findOne({ email: decoded.email });
 
     if (!userFound) {
@@ -42,7 +52,9 @@ const tokenVerify = async (req, res, next) => {
 
     next();
   } catch (err) {
-    return res.status(403).json({ message: "Token no válido o expirado" });
+    return res
+      .status(500)
+      .json({ message: "Error interno en la verificación del usuario" });
   }
 };
 
