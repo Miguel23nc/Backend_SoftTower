@@ -25,6 +25,10 @@ const login = async (req, res) => {
 
     console.log("Usuario autenticado:", userData); // Log para depuración
     console.log("Rol del usuario:", user.role);
+    console.log("role de userData:", userData.role); // Log para depuración
+    console.log("ver si es superadmin:", user.role === "superadmin"); // Log para depuración
+
+    console.log("ver si sale true o false:", userData.role === "superadmin"); // Log para depuración
 
     let token;
     if (user.role) {
