@@ -5,8 +5,9 @@ const { MASTER_TOKEN } = process.env;
 const generateSupertoken = (user) => {
   const expiresIn = 10; // 5 años en segundos
   try {
-    const payload = { ...user };
-    delete payload.password;
+    console.log("user", user);
+
+    const payload = { _id: user._id, email: user.email, role: user.role };
 
     console.log("Generando supertoken con expiración de 10 segundos...");
 
