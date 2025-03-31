@@ -23,23 +23,12 @@ const login = async (req, res) => {
     const userData = user.toObject();
     delete userData.password;
 
-    console.log("Usuario autenticado:", userData); // Log para depuración
-    console.log("Rol del usuario:", user.role);
-    console.log("role de userData:", userData.role); // Log para depuración
-    console.log("ver si es superadmin:", user.role === "superadmin"); // Log para depuración
-
-    console.log("ver si sale true o false:", userData.role === "superadmin"); // Log para depuración
-
     let token;
-    if (user.role) {
-      console.log("Generando SuperToken...");
+    if (userData.role === "superadmin") {
       token = generateSupertoken(userData);
     } else {
-      console.log("Generando Token Normal...");
       token = generatetoken(userData);
     }
-
-    console.log("Token generado:", token); // Verificar si el token se está generando correctamente
 
     res.cookie("token", token, {
       httpOnly: true,
@@ -52,7 +41,6 @@ const login = async (req, res) => {
       token: token,
     });
   } catch (error) {
-    console.log("Error en login:", error);
     return res.status(500).json({ message: "Error en login" });
   }
 };
