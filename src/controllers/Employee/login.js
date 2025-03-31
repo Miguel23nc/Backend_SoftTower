@@ -27,7 +27,7 @@ const login = async (req, res) => {
     console.log("Rol del usuario:", user.role);
 
     let token;
-    if (user.role === "superadmin") {
+    if (user.role) {
       console.log("Generando SuperToken...");
       token = generateSupertoken(userData);
     } else {
