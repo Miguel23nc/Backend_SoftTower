@@ -31,7 +31,6 @@ const updateEmployeePartial = async (req, res) => {
     funcion,
     asistenciaAutomatica,
   } = req.body;
-  console.log("req.body", req.body);
 
   try {
     if (!_id) {
