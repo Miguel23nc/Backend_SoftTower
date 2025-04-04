@@ -17,14 +17,10 @@ const patchBoleDePago = async (req, res) => {
     aportacionesDelEmpleador,
   } = req.body;
   try {
-    console.log("colaborador", colaborador);
-    
     const boletaDePago = await BoletaDePagos.findById(_id);
-
     if (!boletaDePago) {
       return res.status(404).json({ message: "Boleta de pago no encontrada" });
     }
-
     const existingBoleta = await BoletaDePagos.findOne({
       _id: { $ne: _id },
       colaborador: colaborador,
@@ -58,7 +54,6 @@ const patchBoleDePago = async (req, res) => {
       boletaDePago,
     });
   } catch (error) {
-    console.log(error);
     return res.status(500).json({ message: error.message });
   }
 };

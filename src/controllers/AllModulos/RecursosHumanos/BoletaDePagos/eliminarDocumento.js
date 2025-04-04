@@ -17,7 +17,6 @@ const EliminarDocumento = async (req, res) => {
 
     return res.status(200).json({ message: "Documento eliminado" });
   } catch (error) {
-    console.log("Error en mostrarDocxBoleta:", error);
     return res.status(500).json({ message: error.message });
   }
 };

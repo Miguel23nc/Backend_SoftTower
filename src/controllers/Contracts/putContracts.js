@@ -31,8 +31,7 @@ const putContracts = async (req, res) => {
       .status(200)
       .json({ message: "Contrato actualizado correctamente" });
   } catch (error) {
-    console.log(error);
-    return res.status(500).json({ message: "Error updating contract", error });
+    return res.status(500).json({ message: error.message });
   }
 };
 

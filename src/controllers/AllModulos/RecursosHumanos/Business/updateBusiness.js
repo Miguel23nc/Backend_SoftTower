@@ -23,7 +23,6 @@ const updateBusinessPartial = async (req, res) => {
       message: "Empresa actualizada correctamente",
     });
   } catch (error) {
-    console.log(error);
     return res.status(500).json({ message: error.message });
   }
 };

@@ -34,8 +34,6 @@ const registerEmployee = async (req, res) => {
       asistenciaAutomatica,
     } = req.body;
 
-    console.log("photo", photo);
-
     const hashedPassword = await hashPassword(password);
     const findEmployee = await Employee.findOne({ documentNumber });
     if (findEmployee) {
@@ -88,8 +86,6 @@ const registerEmployee = async (req, res) => {
       employee: newEmployee,
     });
   } catch (error) {
-    console.log("Error en registerEmployee:", error);
-
     res.status(500).json({
       message: error.message,
     });

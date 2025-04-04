@@ -13,7 +13,6 @@ const subirBoletas = async (req, res) => {
       .status(201)
       .json({ message: "Boletas de Pago cargados desde JSON" });
   } catch (error) {
-    console.log("Error en subirBoletas:", error);
     return res.status(500).json({ message: error.message });
   }
 };

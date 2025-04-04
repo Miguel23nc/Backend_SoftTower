@@ -2,8 +2,6 @@ const Cotizacion = require("../../models/Cotizacion");
 
 const generarCorrelativa = async (fechaOperacion) => {
   try {
-    console.log("fechaOperacion : ", fechaOperacion);
-    
     const año = fechaOperacion.getFullYear().toString().slice(2);
     const correlativaBase = `${año}`;
 
@@ -24,7 +22,6 @@ const generarCorrelativa = async (fechaOperacion) => {
         ultimaCotizacion.correlativa.toString().slice(2),
         10
       );
-      console.log("ultimaCorrelativa : ", ultimaCorrelativa);
       // Verificar que ultimaCorrelativa es un número válido
       if (isNaN(ultimaCorrelativa)) {
         throw new Error(
@@ -52,8 +49,7 @@ const generarCorrelativa = async (fechaOperacion) => {
 
     return nuevaCorrelativa;
   } catch (error) {
-    console.error("Error al generar la correlativa:", error.message);
-    throw error; // Lanza el error para que pueda ser manejado donde se llame esta función
+    throw ("Error al generar la correlativa:", error.message);
   }
 };
 

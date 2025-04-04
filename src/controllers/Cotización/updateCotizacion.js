@@ -63,7 +63,6 @@ const updateCotizacionPartial = async (req, res) => {
       message: "Cotización actualizada correctamente",
     });
   } catch (error) {
-    console.log(error);
     return res.status(500).json({ message: error.message });
   }
 };

@@ -25,8 +25,6 @@ const postContracts = async (req, res) => {
     const savedContract = await newContract.save();
     return res.status(201).json({ message: "Contrato Creado", savedContract });
   } catch (error) {
-    console.log(error);
-
     return res.status(500).json({ message: error.message });
   }
 };

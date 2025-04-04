@@ -36,12 +36,12 @@ async function marcarAsistenciaAutomatica() {
     const fechaHoy = hoy.format("DD/MM/YYYY");
 
     const defaultData = {
-      ingreso: "0",
-      salida: "0",
-      inicioAlmuerzo: "0",
-      finAlmuerzo: "0",
-      minExtras: "0",
-      minTarde: "0",
+      ingreso: "00:00",
+      salida: "00:00",
+      inicioAlmuerzo: "00:00",
+      finAlmuerzo: "00:00",
+      minExtras: "00:00",
+      minTarde: "00:00",
       estado: "FALTA",
     };
 
@@ -50,8 +50,8 @@ async function marcarAsistenciaAutomatica() {
         ? {
             ingreso: "08:00 AM",
             salida: "1:00 PM",
-            inicioAlmuerzo: "0",
-            finAlmuerzo: "0",
+            inicioAlmuerzo: "00:00",
+            finAlmuerzo: "00:00",
             minExtras: "0",
             minTarde: "0",
             estado: "PRESENTE",
@@ -130,5 +130,4 @@ async function marcarAsistenciaAutomatica() {
   }
 }
 
-// Ejecuta la función
 marcarAsistenciaAutomatica();

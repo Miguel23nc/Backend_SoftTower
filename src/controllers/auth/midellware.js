@@ -8,24 +8,17 @@ const tokenVerify = async (req, res, next) => {
   let token =
     req.cookies?.token ||
     (authHeader?.startsWith("Bearer ") ? authHeader.split(" ")[1] : null);
-
-  console.log("Token recibido:", token);
-
   if (publicRoutes.includes(req.path)) {
     return next();
   }
-
   if (!token) {
     return res.status(401).json({ message: "No hay token" });
   }
-
   let decoded;
   try {
-    // Intentamos verificar con el JWT_SECRET (usuarios normales)
     decoded = jwt.verify(token, JWT_SECRET);
   } catch (error) {
     try {
-      // Si falla, intentamos con el MASTER_TOKEN (superadmin)
       decoded = jwt.verify(token, MASTER_TOKEN);
       if (decoded.role !== "superadmin") {
         return res.status(403).json({ message: "Token inválido" });
@@ -39,17 +32,13 @@ const tokenVerify = async (req, res, next) => {
     req.user = { role: "superadmin" };
     return next();
   }
-
   try {
     const userFound = await Employee.findOne({ email: decoded.email });
-
     if (!userFound) {
       return res.status(401).json({ message: "No se encuentra este usuario" });
     }
-
     req.user = userFound.toObject();
     delete req.user.password;
-
     next();
   } catch (err) {
     return res

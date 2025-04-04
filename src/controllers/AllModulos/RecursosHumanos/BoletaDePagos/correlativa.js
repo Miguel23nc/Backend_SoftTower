@@ -2,10 +2,8 @@ const BoletaDePagos = require("../../../../models/RecursosHumanos/BoletaDePago")
 
 const generarCorrelativa = async (fechaOperacion) => {
   try {
-    console.log("fechaOperacion : ", fechaOperacion);
     const añoActual = fechaOperacion.getFullYear().toString().slice(2);
     const correlativaBase = `${añoActual}`;
-    console.log("correlativaBase : ", correlativaBase);
 
     const ultimaCotizacion = await BoletaDePagos.findOne({
       correlativa: {
@@ -22,7 +20,6 @@ const generarCorrelativa = async (fechaOperacion) => {
         ultimaCotizacion.correlativa.toString().slice(2), // Obtenemos solo los números después del año (por ejemplo 000001)
         10
       );
-      console.log("ultimaCorrelativa : ", ultimaCorrelativa);
 
       if (isNaN(ultimaCorrelativa)) {
         throw new Error(
@@ -48,7 +45,6 @@ const generarCorrelativa = async (fechaOperacion) => {
       );
     }
 
-    console.log("nuevaCorrelativa : ", nuevaCorrelativa);
 
     return nuevaCorrelativa; // Devolvemos la nueva correlativa generada
   } catch (error) {

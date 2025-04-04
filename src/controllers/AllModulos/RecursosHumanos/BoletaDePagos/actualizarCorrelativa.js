@@ -6,11 +6,9 @@ const actualizarCorrelativas = async (correlativaEliminada) => {
       { correlativa: { $gt: correlativaEliminada } },
       { $inc: { correlativa: -1 } }
     );
-
-    console.log(`${result.nModified} correlativas han sido actualizadas.`);
+    return result;
   } catch (error) {
-    console.error("Error al actualizar las correlativas:", error.message);
-    throw error;
+    throw ("Error al actualizar las correlativas:", error.message);
   }
 };
 

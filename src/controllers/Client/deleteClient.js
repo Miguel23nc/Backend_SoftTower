@@ -3,7 +3,6 @@ const Client = require("../../models/Client");
 const deleteClient = async (req, res) => {
   try {
     const { _id } = req.body;
-    console.log(_id);
     const client = await Client.findByIdAndDelete(_id);
 
     if (!client) {
@@ -12,8 +11,7 @@ const deleteClient = async (req, res) => {
 
     res.json({ message: "Client deleted successfully" });
   } catch (error) {
-    console.log(error);
-    return res.status(500).json({ message: "Server error" });
+    return res.status(500).json({ message: error.message });
   }
 };
 

@@ -9,7 +9,6 @@ const getBoletaDePagos = async (req, res) => {
     }
     return res.status(200).json(boleta);
   } catch (error) {
-    console.log("Error en getBoletaDePagos:", error);
     return res.status(500).json({ message: error.message });
   }
 };

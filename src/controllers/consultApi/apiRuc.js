@@ -12,7 +12,6 @@ const consulApi = async (req, res) => {
         });
         return res.json(response.data);
     } catch (error) {
-        console.log(error);
         res.status(400).json({ error: error.message });
     }
 }

@@ -7,16 +7,12 @@ const instance = new ILovePDFApi(
 );
 
 const convertPathToPdf = async (archivoUrl) => {
-  console.log("archivoUrl", archivoUrl);
-  
   try {
     // Crear una nueva tarea
     let task = instance.newTask("officepdf");
     await task.start();
-    // console.log("Tarea iniciada en iLovePDF");
 
     await task.addFile(archivoUrl);
-    // console.log("Archivo agregado a la tarea:");
 
     await task.process();
 
@@ -24,8 +20,7 @@ const convertPathToPdf = async (archivoUrl) => {
     if (!pdfBuffer) throw new Error("No se pudo descargar el archivo PDF.");
     return pdfBuffer;
   } catch (error) {
-    console.error("Error al convertir el archivo DOCX a PDF:", error.message);
-    throw error;
+    throw ("Error al convertir el archivo DOCX a PDF:", error.message);
   }
 };
 

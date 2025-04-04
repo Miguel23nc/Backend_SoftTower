@@ -50,6 +50,7 @@ const getEmployeeById = require("../controllers/Employee/getEmployeById");
 const getContractById = require("../controllers/Contracts/getContractById");
 const getCertificados = require("../controllers/AllModulos/Certificaciones/Certificados/getCertificados");
 const postCertificado = require("../controllers/AllModulos/Certificaciones/Certificados/postCertificados");
+const deleteContract = require("../controllers/Contracts/deleteContracts");
 
 const router = Router();
 
@@ -87,6 +88,7 @@ router.delete("/deleteBusiness", deleteBusiness);
 router.delete("/deletePlantillaContrato", deletePlantillaContrato);
 router.delete("/deleteAsistenciaColaborador", deleteAsistenciaColaborador);
 router.delete("/deleteDocument", EliminarDocumento);
+router.delete("/deleteContract", deleteContract);
 
 router.get("/getCertificados", getCertificados);
 router.get("/recepcionBoleta", recepcionBoleta);

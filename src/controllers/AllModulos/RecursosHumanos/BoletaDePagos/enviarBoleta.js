@@ -28,7 +28,6 @@ dayjs.extend(timezone);
 
 const enviarBoleta = async (req, res) => {
   const { datosBoleta, business } = req.body;
-  console.log("datosBoleta", datosBoleta);
 
   try {
     if (!datosBoleta || datosBoleta.length === 0) {
@@ -217,16 +216,13 @@ const enviarBoleta = async (req, res) => {
             .format("DD/MM/YYYY hh:mm A");
           await findBoleta.save();
         } catch (error) {
-          console.log("Error enviando el correo a:", email);
           errores.push({ email, error: error.message });
         }
       });
     }
 
     await queue.onIdle();
-    console.log("Errores:", errores);
   } catch (error) {
-    console.error(error);
     return res.status(500).json({ message: error.message });
   }
 };

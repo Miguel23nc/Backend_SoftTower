@@ -41,17 +41,13 @@ const uploadTemporaryDocument = (fileBuffer, fileName) => {
       },
       async (error, result) => {
         if (error) return reject(error);
-
-        console.log(`Archivo subido: ${result.secure_url}`);
-
         setTimeout(async () => {
           try {
             await cloudinary.uploader.destroy(result.public_id, {
               resource_type: "raw",
             });
-            console.log(`Archivo eliminado: ${result.public_id}`);
           } catch (err) {
-            console.error(`Error al eliminar ${result.public_id}:`, err);
+            throw (`Error al eliminar ${result.public_id}:`, err);
           }
         }, 10 * 60 * 1000);
 

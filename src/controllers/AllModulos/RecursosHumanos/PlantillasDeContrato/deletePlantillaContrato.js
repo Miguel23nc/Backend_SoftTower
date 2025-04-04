@@ -15,7 +15,6 @@ const deletePlantillaContrato = async (req, res) => {
       message: "Plantilla de Contrato eliminado correctamente",
     });
   } catch (error) {
-    console.log(error);
     return res.status(500).json({ message: error.message });
   }
 };

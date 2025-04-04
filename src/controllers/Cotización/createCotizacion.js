@@ -83,9 +83,8 @@ const createCotizacion = async (req, res) => {
       cotizacion,
     });
   } catch (error) {
-    console.log(error);
     return res.status(500).json({
-      mesasage: error,
+      mesasage: error.message,
     });
   }
 };

@@ -5,7 +5,7 @@ const getModules = async(req, res) =>{
         const modules = await Module.find()
         return res.status(200).json(modules)
     } catch (error) {
-        console.log(error);
+        return res.status(500).json({message: error.message})
     }
 } 
 module.exports = getModules

@@ -8,7 +8,6 @@ dayjs.extend(timezone);
 
 const recepcionBoleta = async (req, res) => {
   const { boletaId } = req.query;
-  console.log("boletaId", boletaId);
 
   if (boletaId) {
     const fechaRecepcion = new Date();
@@ -18,7 +17,6 @@ const recepcionBoleta = async (req, res) => {
     await BoletaDePagos.findByIdAndUpdate(boletaId, {
       recepcion: fechaRecepcionFormatted,
     });
-    console.log(`Boleta ${boletaId} abierta el ${fechaRecepcionFormatted}`);
   }
 
   // Responde con una imagen vacía (1x1 pixel transparente)

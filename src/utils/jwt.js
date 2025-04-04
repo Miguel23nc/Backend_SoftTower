@@ -10,7 +10,7 @@ const generatetoken = (user) => {
     };
     return jwt.sign(payload, JWT_SECRET, { expiresIn: "24h" });
   } catch (error) {
-    console.log(error);
+    return error.message;
   }
 };
 

@@ -31,8 +31,6 @@ const updateEmployeePartial = async (req, res) => {
     funcion,
     asistenciaAutomatica,
   } = req.body;
-  console.log("req.body", req.body);
-
   try {
     if (!_id) {
       return res.status(400).json({ message: "El ID es obligatorio" });
@@ -82,7 +80,6 @@ const updateEmployeePartial = async (req, res) => {
       message: "Usuario actualizado correctamente",
     });
   } catch (error) {
-    console.log(error);
     return res.status(500).json({ message: error.message });
   }
 };

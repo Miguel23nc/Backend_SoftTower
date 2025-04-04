@@ -4,7 +4,6 @@ const createBusiness = async (req, res) => {
   try {
     const { ruc, razonSocial, domicilioFiscal, logo, representative } =
       req.body;
-    console.log("req.body", req.body);
     if (!ruc)
       return res.status(400).json({ message: "El campo ruc es obligatorio" });
     if (!razonSocial)
