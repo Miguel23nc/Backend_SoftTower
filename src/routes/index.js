@@ -51,6 +51,7 @@ const getContractById = require("../controllers/Contracts/getContractById");
 const getCertificados = require("../controllers/AllModulos/Certificaciones/Certificados/getCertificados");
 const postCertificado = require("../controllers/AllModulos/Certificaciones/Certificados/postCertificados");
 const deleteContract = require("../controllers/Contracts/deleteContracts");
+const sistemasRouter = require("./Sistemas/sistemas");
 
 const router = Router();
 
@@ -108,5 +109,7 @@ router.get("/auth/verify", verifyToken);
 router.get("/employee", getEmployee);
 router.get("/employee/:id", getEmployeeById);
 router.get("/ruc", consulApi);
+
+router.use("/sistemas", sistemasRouter);
 
 module.exports = router;

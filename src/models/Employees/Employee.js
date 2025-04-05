@@ -65,7 +65,6 @@ const employeeSchema = mongoose.Schema(
     },
     funcion: {
       type: String,
-      required: true,
     },
     sueldo: {
       type: Number,

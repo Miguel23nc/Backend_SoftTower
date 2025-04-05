@@ -6,9 +6,6 @@ const datosContablesSchema = new mongoose.Schema({
     required: true,
     unique: true,
   },
-  cuentaContable: {
-    type: String,
-  },
   concepto: {
     type: String,
     required: true,
