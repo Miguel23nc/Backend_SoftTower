@@ -40,8 +40,8 @@ async function marcarAsistenciaAutomatica() {
       salida: "00:00",
       inicioAlmuerzo: "00:00",
       finAlmuerzo: "00:00",
-      minExtras: "00:00",
-      minTarde: "00:00",
+      minExtras: "0",
+      minTarde: "0",
       estado: "FALTA",
     };
 
