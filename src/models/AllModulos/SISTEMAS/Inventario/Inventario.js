@@ -7,6 +7,14 @@ const inventarioSchema = new Schema(
       type: String,
       required: true,
     },
+    modelo: {
+      type: String,
+      required: true,
+    },
+    especificaciones: {
+      type: String,
+      required: true,
+    },
     area: {
       type: String,
       required: true,
@@ -30,12 +38,8 @@ const inventarioSchema = new Schema(
     },
     state: {
       type: String,
-      enum: ["ACTIVO", "INACTIVO", "DISPONIBLE"],
-      default: "DISPONIBLE",
-    },
-    descripcion: {
-      type: String,
-      required: true,
+      enum: ["ACTIVO", "INACTIVO"],
+      default: "ACTIVO",
     },
     observacion: {
       type: String,

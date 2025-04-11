@@ -70,11 +70,6 @@ const employeeSchema = mongoose.Schema(
       type: Number,
       required: true,
     },
-    // user: {
-    //   type: String,
-    //   required: true,
-    //   unique: true,
-    // },
     password: {
       type: String,
       required: true,

@@ -2,7 +2,7 @@ const InventarioSistemas = require("../../../../models/AllModulos/SISTEMAS/Inven
 
 const getIntenarioSistemas = async (req, res) => {
   try {
-    const inventarios = await InventarioSistemas.find();
+    const inventarios = await InventarioSistemas.find().populate("encargado");
     if (!inventarios) {
       return res.status(404).json({ message: "No se encontraron inventarios" });
     }

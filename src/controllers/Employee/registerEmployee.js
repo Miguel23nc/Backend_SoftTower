@@ -1,7 +1,8 @@
 const Business = require("../../models/Business");
 const Employee = require("../../models/Employees/Employee");
+const Widget = require("../../models/Herramientas/Widgets/Widget");
+const WidgetPreference = require("../../models/Herramientas/Widgets/WidgetPreference");
 const { hashPassword } = require("../../utils/bcrypt");
-// const { uploadImage } = require("../../utils/cloudinary");
 
 const registerEmployee = async (req, res) => {
   try {
@@ -81,9 +82,26 @@ const registerEmployee = async (req, res) => {
 
     await newEmployee.save();
 
+    const widget = await Widget.findOne({
+      key: "NOVEDADES_LINK",
+    });
+    if (!widget) {
+      return res.status(404).json({ message: "Widget no encontrado" });
+    }
+
+    const prefs = new WidgetPreference({
+      colaborador: newEmployee._id,
+      widgets: [
+        {
+          widget: widget._id,
+          orden: 0,
+        },
+      ],
+    });
+
+    await prefs.save();
     res.status(201).json({
       message: "Colaborador registrado exitosamente",
-      employee: newEmployee,
     });
   } catch (error) {
     res.status(500).json({

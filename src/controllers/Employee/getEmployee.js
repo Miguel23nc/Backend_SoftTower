@@ -2,7 +2,7 @@ const Employee = require("../../models/Employees/Employee");
 
 const getEmployee = async (req, res) => {
   try {
-    const userFind = await Employee.find();
+    const userFind = await Employee.find()
     if (!userFind) {
       return res.status(404).json({ message: "No se encontraron empleados" });
     }

@@ -7,19 +7,23 @@ const widgetSchema = new Schema(
       type: String,
       required: true,
     },
-    description: {
+    key: {
+      type: String,
+      required: true,
+      unique: true,
+    },
+    descripcion: {
+      type: String,
+    },
+    imagen: {
       type: String,
       required: true,
     },
-    type: {
+    grupo: {
       type: String,
-      enum: ["TEXT", "IMAGE", "VIDEO", "AUDIO"],
       required: true,
     },
-    content: {
-      type: Schema.Types.Mixed,
-      required: true,
-    },
+    
   },
   { timestamps: true }
 );

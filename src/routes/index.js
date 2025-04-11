@@ -52,6 +52,13 @@ const getCertificados = require("../controllers/AllModulos/Certificaciones/Certi
 const postCertificado = require("../controllers/AllModulos/Certificaciones/Certificados/postCertificados");
 const deleteContract = require("../controllers/Contracts/deleteContracts");
 const sistemasRouter = require("./Sistemas/sistemas");
+const postWidget = require("../controllers/Herramientas/Widgets/postWidgets");
+const deleteWidget = require("../controllers/Herramientas/Widgets/deleteWidget");
+const getAllWidgets = require("../controllers/Herramientas/Widgets/getAllWidgets");
+const patchWidget = require("../controllers/Herramientas/Widgets/patchWidget");
+const addWidgetEmployee = require("../controllers/Herramientas/Widgets/widgetEmployee");
+const getWidgetEmployee = require("../controllers/Herramientas/Widgets/getWidgetEmployee");
+const updateWidgetPreference = require("../controllers/Herramientas/Widgets/updateWidgetPreference");
 
 const router = Router();
 
@@ -72,6 +79,8 @@ router.post("/postDatosContables", postDatosContables);
 router.post("/enviarBoletasDePago", enviarBoleta);
 router.post("/boletajson", subirBoletas);
 router.post("/postCertificado", postCertificado);
+router.post("/postWidget", postWidget);
+router.post("/addWidgetPreference", addWidgetEmployee);
 
 router.patch("/patchBusiness", updateBusinessPartial);
 router.patch("/patchCotizacion", updateCotizacionPartial);
@@ -81,6 +90,8 @@ router.patch("/patchContract", putContracts);
 router.patch("/patchPlantillaDeContrato", putPlantillaDeContrato);
 router.patch("/patchAsistenciaColaborador", updateAsistenciaColaborador);
 router.patch("/patchBoletaDePago", patchBoleDePago);
+router.patch("/patchWidget", patchWidget);
+router.patch("/updateWidgetPreference", updateWidgetPreference);
 
 router.delete("/deleteBoletaDePago", deleteBoletaDePago);
 router.delete("/deleteClient", deleteClient);
@@ -90,7 +101,10 @@ router.delete("/deletePlantillaContrato", deletePlantillaContrato);
 router.delete("/deleteAsistenciaColaborador", deleteAsistenciaColaborador);
 router.delete("/deleteDocument", EliminarDocumento);
 router.delete("/deleteContract", deleteContract);
+router.delete("/deleteWidget", deleteWidget);
 
+router.get("/getWidgetsPreference/:colaborador", getWidgetEmployee);
+router.get("/getAllWidgets", getAllWidgets);
 router.get("/getCertificados", getCertificados);
 router.get("/recepcionBoleta", recepcionBoleta);
 router.get("/getDatosContables", getDatosContables);

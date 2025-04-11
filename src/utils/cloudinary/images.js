@@ -22,5 +22,13 @@ const deleteImage = async (publicId) => {
     throw error;
   }
 };
+const extractPublicId = (url) => {
+  const parts = url.split("/");
+  const versionIndex = parts.findIndex((p) => /^v\d+$/.test(p));
+  const publicIdParts = parts.slice(versionIndex + 1);
+  const lastPart = publicIdParts.join("/");
+  const dotIndex = lastPart.lastIndexOf(".");
+  return lastPart.substring(0, dotIndex);
+};
 
-module.exports = { uploadImage, deleteImage };
+module.exports = { uploadImage, deleteImage, extractPublicId };
