@@ -1,25 +1,32 @@
-const server = require("express");
+const express = require("express");
 const morgan = require("morgan");
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
 const routes = require("./routes/index");
 const bodyParser = require("body-parser");
 const fileUpload = require("express-fileupload");
-const app = server();
-const verifyToken = require("./controllers/auth/midellware");
+const http = require("http"); // Importar http para usarlo con Socket.IO
+const socketIo = require("socket.io"); // Importar socket.io
 const dotenv = require("dotenv");
 dotenv.config();
+
 const { FRONTEND_URL, FRONTEND2_URL } = process.env;
+
 const allowedOrigins = [
   FRONTEND_URL?.toString(),
   FRONTEND2_URL?.toString(),
-  "http://localhost:5173",
+  "http://localhost:5173", // Agrega cualquier otro dominio si es necesario
 ];
 
+const app = express();
+const verifyToken = require("./controllers/auth/midellware");
+
+// Configuración de CORS para Express
 app.use(fileUpload());
 app.use(morgan("dev"));
 app.use(bodyParser.json());
 
+// Middleware de CORS
 app.use((req, res, next) => {
   const origin = req.headers.origin;
 
@@ -46,7 +53,32 @@ app.use((req, res, next) => {
 });
 
 app.use(cookieParser());
-app.use(server.json());
+app.use(express.json());
 app.use("/api", routes);
 
-module.exports = app;
+// Crear el servidor HTTP para Express
+const httpServer = http.createServer(app);
+
+// Configurar Socket.IO y habilitar CORS
+const io = socketIo(httpServer, {
+  cors: {
+    origin: allowedOrigins, // Usar el array de URLs permitidas
+    methods: ["GET", "POST"],
+    credentials: true, // Permitir credenciales
+  },
+});
+app.set("io", io); // <- ESTO es lo que falta
+
+io.on("connection", (socket) => {
+  // El frontend debe enviar el ID del usuario al conectarse
+  socket.on("register", (employeeId) => {
+    socket.join(employeeId); // Así puedes enviarle mensajes individualmente
+    console.log(`Socket ${socket.id} unido a ${employeeId}`);
+  });
+
+  socket.on("disconnect", () => {
+    console.log(`Socket ${socket.id} desconectado`);
+  });
+});
+
+module.exports = { app, httpServer }; // Exporta tanto la app como el servidor

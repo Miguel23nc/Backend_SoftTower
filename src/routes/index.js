@@ -59,6 +59,9 @@ const patchWidget = require("../controllers/Herramientas/Widgets/patchWidget");
 const addWidgetEmployee = require("../controllers/Herramientas/Widgets/widgetEmployee");
 const getWidgetEmployee = require("../controllers/Herramientas/Widgets/getWidgetEmployee");
 const updateWidgetPreference = require("../controllers/Herramientas/Widgets/updateWidgetPreference");
+const deleteSubmodule = require("../controllers/SubModules/deleteSubmodule");
+const deleteModule = require("../controllers/Modules/deleteModule");
+const getAllNotificaciones = require("../controllers/Herramientas/Notification/getNotification");
 
 const router = Router();
 
@@ -66,8 +69,8 @@ router.post("/registerEmployee", register);
 router.post("/login", login);
 router.post("/logout", logout);
 router.post("/postPermissions", postPermissions);
-router.post("/createModule", createModule);
-router.post("/createSubModule", createSubmodule);
+router.post("/postModule", createModule);
+router.post("/postSubmodule", createSubmodule);
 router.post("/createBusiness", createBusiness);
 router.post("/createClient", createClient);
 router.post("/createCotizacion", createCotizacion);
@@ -102,7 +105,10 @@ router.delete("/deleteAsistenciaColaborador", deleteAsistenciaColaborador);
 router.delete("/deleteDocument", EliminarDocumento);
 router.delete("/deleteContract", deleteContract);
 router.delete("/deleteWidget", deleteWidget);
+router.delete("/deleteSubmodule", deleteSubmodule);
+router.delete("/deleteModule", deleteModule);
 
+router.get("/getAllNotificaciones", getAllNotificaciones);
 router.get("/getWidgetsPreference/:colaborador", getWidgetEmployee);
 router.get("/getAllWidgets", getAllWidgets);
 router.get("/getCertificados", getCertificados);

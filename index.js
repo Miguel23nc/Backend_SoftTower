@@ -1,8 +1,12 @@
 require("dotenv").config();
 const { PORT } = process.env;
-const app = require("./src/app.js");
-const connectDB = require("./src/dbConnection.js");
+const { httpServer } = require("./src/app"); // Importar el servidor con Socket.IO integrado
+const connectDB = require("./src/dbConnection");
 
+// Conectar a la base de datos
 connectDB();
 
-app.listen(PORT || 3001);
+// Iniciar el servidor
+httpServer.listen(PORT || 3001, () => {
+  console.log(`Servidor corriendo en el puerto ${PORT || 3001}`);
+});

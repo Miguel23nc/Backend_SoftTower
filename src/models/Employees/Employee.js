@@ -36,6 +36,9 @@ const employeeSchema = mongoose.Schema(
       type: String,
       required: true,
     },
+    dateStart: {
+      type: String,
+    },
     genre: {
       type: String,
       required: true,
@@ -56,9 +59,6 @@ const employeeSchema = mongoose.Schema(
       unique: true,
     },
     location: locationSchema,
-    datestart: {
-      type: String,
-    },
     charge: {
       type: String,
       required: true,
