@@ -1,3 +1,4 @@
+const dayjs = require("dayjs");
 const Employee = require("../../../../../models/Employees/Employee");
 const AsistenciaColaborador = require("../../../../../models/RecursosHumanos/AsistenciaColaborador");
 
@@ -13,8 +14,6 @@ const postAsistenciaColaborador = async (req, res) => {
       estado,
       dni,
     } = req.body;
-    //si recibo el ingreso debo marcar min tardanza
-    //si recibo la salida debo marcar min extras
 
     if (!fecha) {
       return res.status(400).json({ message: "La Fecha es obligatoria" });
@@ -59,15 +58,49 @@ const postAsistenciaColaborador = async (req, res) => {
         message: "Ya existe una asistencia para este colaborador en esta fecha",
       });
     }
+    let state;
+    let minTarde = 0;
+    if (!estado) {
+      const horaLimite = dayjs().hour(8).minute(0).format("hh:mm A");
+      const horaIngreso = dayjs(ingreso, "hh:mm A").format("hh:mm A");
+      if (horaIngreso > horaLimite) {
+        state = "TARDANZA";
+        minTarde = dayjs(horaIngreso, "hh:mm A").diff(
+          dayjs(horaLimite, "hh:mm A"),
+          "minute"
+        );
+      }
+      if (horaIngreso <= horaLimite) {
+        state = "PRESENTE";
+      }
+    }
+    let horasExtras = 0;
+    if (salida) {
+      const horaSalida = dayjs(salida, "hh:mm A").format("hh:mm A");
+      const diaSemana = dayjs(fecha).day(); // 0 = Domingo, 1 = Lunes, ..., 6 = Sábado
+      const horaLimiteSalida =
+        diaSemana === 6
+          ? dayjs().hour(13).minute(0).format("hh:mm A") // Sábado: 1:00 PM
+          : dayjs().hour(18).minute(30).format("hh:mm A"); // Lunes a Viernes: 5:30 PM
+
+      if (horaSalida > horaLimiteSalida) {
+        horasExtras = dayjs(horaSalida, "hh:mm A").diff(
+          dayjs(horaLimiteSalida, "hh:mm A"),
+          "minute"
+        );
+      }
+    }
 
     const asistencia = new AsistenciaColaborador({
-      colaborador: colaborador || findColaborador._id, // ✅ Asegura que siempre haya un colaborador
+      colaborador: colaborador || findColaborador._id,
       fecha,
       ingreso,
       salida,
       inicioAlmuerzo,
       finAlmuerzo,
-      estado,
+      estado: estado || state,
+      minExtras: horasExtras,
+      minTarde: minTarde,
     });
 
     await asistencia.save();
