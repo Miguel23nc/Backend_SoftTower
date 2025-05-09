@@ -8,7 +8,6 @@ const instance = new ILovePDFApi(
 
 const convertPathToPdf = async (archivoUrl) => {
   try {
-    // Crear una nueva tarea
     let task = instance.newTask("officepdf");
     await task.start();
 

@@ -1,7 +1,9 @@
-const dayjs = require("dayjs");
 const Employee = require("../../../../../models/Employees/Employee");
 const AsistenciaColaborador = require("../../../../../models/RecursosHumanos/AsistenciaColaborador");
+const dayjs = require("dayjs");
+const customParseFormat = require("dayjs/plugin/customParseFormat");
 
+dayjs.extend(customParseFormat);
 const postAsistenciaColaborador = async (req, res) => {
   try {
     const {
@@ -60,34 +62,31 @@ const postAsistenciaColaborador = async (req, res) => {
     }
     let state;
     let minTarde = 0;
+
     if (!estado) {
-      const horaLimite = dayjs().hour(8).minute(0).format("hh:mm A");
-      const horaIngreso = dayjs(ingreso, "hh:mm A").format("hh:mm A");
-      if (horaIngreso > horaLimite) {
+      const horaLimite = dayjs("08:00 AM", "hh:mm A");
+      const horaIngreso = dayjs(ingreso, "hh:mm A");
+      console.log("horaingreso.isAfter", horaIngreso.isAfter(horaLimite));
+
+      if (horaIngreso.isAfter(horaLimite)) {
         state = "TARDANZA";
-        minTarde = dayjs(horaIngreso, "hh:mm A").diff(
-          dayjs(horaLimite, "hh:mm A"),
-          "minute"
-        );
-      }
-      if (horaIngreso <= horaLimite) {
+        minTarde = horaIngreso.diff(horaLimite, "minute");
+      } else {
         state = "PRESENTE";
       }
     }
     let horasExtras = 0;
+
     if (salida) {
-      const horaSalida = dayjs(salida, "hh:mm A").format("hh:mm A");
-      const diaSemana = dayjs(fecha).day(); // 0 = Domingo, 1 = Lunes, ..., 6 = Sábado
+      const diaSemana = dayjs(fecha).day();
       const horaLimiteSalida =
         diaSemana === 6
-          ? dayjs().hour(13).minute(0).format("hh:mm A") // Sábado: 1:00 PM
-          : dayjs().hour(18).minute(30).format("hh:mm A"); // Lunes a Viernes: 5:30 PM
+          ? dayjs("01:30 PM", "hh:mm A")
+          : dayjs("06:00 PM", "hh:mm A");
 
-      if (horaSalida > horaLimiteSalida) {
-        horasExtras = dayjs(horaSalida, "hh:mm A").diff(
-          dayjs(horaLimiteSalida, "hh:mm A"),
-          "minute"
-        );
+      const horaSalida = dayjs(salida, "hh:mm A");
+      if (horaSalida.isAfter(horaLimiteSalida)) {
+        horasExtras = horaSalida.diff(horaLimiteSalida, "minute") + 30;
       }
     }
 
@@ -99,8 +98,8 @@ const postAsistenciaColaborador = async (req, res) => {
       inicioAlmuerzo,
       finAlmuerzo,
       estado: estado || state,
-      minExtras: horasExtras,
-      minTarde: minTarde,
+      minExtras: parseInt(horasExtras),
+      minTarde: parseInt(minTarde),
     });
 
     await asistencia.save();
@@ -109,7 +108,6 @@ const postAsistenciaColaborador = async (req, res) => {
       asistencia,
     });
   } catch (error) {
-    console.error("❌ Error en postAsistenciaColaborador:", error);
     return res
       .status(500)
       .json({ message: error.message || "Error inesperado en el servidor." });

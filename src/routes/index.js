@@ -62,6 +62,7 @@ const updateWidgetPreference = require("../controllers/Herramientas/Widgets/upda
 const deleteSubmodule = require("../controllers/SubModules/deleteSubmodule");
 const deleteModule = require("../controllers/Modules/deleteModule");
 const getAllNotificaciones = require("../controllers/Herramientas/Notification/getNotification");
+const returnPdf = require("../controllers/AllModulos/RecursosHumanos/Asistencia/colaborador/returnPdf");
 
 const router = Router();
 
@@ -84,6 +85,7 @@ router.post("/boletajson", subirBoletas);
 router.post("/postCertificado", postCertificado);
 router.post("/postWidget", postWidget);
 router.post("/addWidgetPreference", addWidgetEmployee);
+router.post("/returnPdf", returnPdf);
 
 router.patch("/patchBusiness", updateBusinessPartial);
 router.patch("/patchCotizacion", updateCotizacionPartial);

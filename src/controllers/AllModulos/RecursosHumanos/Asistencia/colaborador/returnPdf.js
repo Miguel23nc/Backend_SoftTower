@@ -6,6 +6,8 @@ const returnPdf = async (req, res) => {
     if (!archivoUrlDocx) {
       return res.status(404).json({ message: "Archivo no encontrado." });
     }
+    console.log("archivoUrlDocx", archivoUrlDocx);
+    
     const pdfBuffer = await convertPathToPdf(archivoUrlDocx);
     if (!pdfBuffer) {
       return res
