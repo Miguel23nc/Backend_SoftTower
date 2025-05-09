@@ -54,40 +54,36 @@ const updateAsistenciaColaborador = async (req, res) => {
           message: "No se puede modificar la Salida",
         });
     }
-    let minTarde = 0;
+
     if (ingreso) {
+      let minTarde = 0;
       let state;
-      const horaLimite = dayjs().hour(8).minute(0).format("hh:mm A");
-      const horaIngreso = dayjs(ingreso, "hh:mm A").format("hh:mm A");
-      if (horaIngreso > horaLimite) {
+      const horaLimite = dayjs("08:00 AM", "hh:mm A");
+      const horaIngreso = dayjs(ingreso, "hh:mm A");
+      console.log("horaingreso.isAfter", horaIngreso.isAfter(horaLimite));
+
+      if (horaIngreso.isAfter(horaLimite)) {
         state = "TARDANZA";
-        minTarde = dayjs(horaIngreso, "hh:mm A").diff(
-          dayjs(horaLimite, "hh:mm A"),
-          "minute"
-        );
-      }
-      if (horaIngreso <= horaLimite) {
+        minTarde = horaIngreso.diff(horaLimite, "minute");
+      } else {
         state = "PRESENTE";
       }
       findAsistenciaColaborador.ingreso = ingreso;
       findAsistenciaColaborador.minTarde = minTarde;
       findAsistenciaColaborador.estado = state;
     }
-    let horasExtras = 0;
+
     if (salida) {
-      const horaSalida = dayjs(salida, "hh:mm A").format("hh:mm A");
-      const diaSemana = dayjs(fecha).day(); // 0 = Domingo, 1 = Lunes, ..., 6 = Sábado
+      let horasExtras = 0;
+      const diaSemana = dayjs(fecha).day();
       const horaLimiteSalida =
         diaSemana === 6
-          ? dayjs().hour(13).minute(30).format("hh:mm A") // Sábado: 1:30 PM
-          : dayjs().hour(18).minute(0).format("hh:mm A"); // Lunes a Viernes: 6:00 PM
+          ? dayjs("01:30 PM", "hh:mm A")
+          : dayjs("06:00 PM", "hh:mm A");
 
-      if (horaSalida > horaLimiteSalida) {
-        horasExtras =
-          dayjs(horaSalida, "hh:mm A").diff(
-            dayjs(horaLimiteSalida, "hh:mm A"),
-            "minute"
-          ) + 30;
+      const horaSalida = dayjs(salida, "hh:mm A");
+      if (horaSalida.isAfter(horaLimiteSalida)) {
+        horasExtras = horaSalida.diff(horaLimiteSalida, "minute") + 30;
       }
       findAsistenciaColaborador.salida = salida;
       findAsistenciaColaborador.minExtras = horasExtras;
