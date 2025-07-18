@@ -15,11 +15,21 @@ const createMovimiento = async (req, res) => {
         message: "Falta el código de ingreso para el movimiento de salida",
       });
     }
-    const correlativa = await generarCorrelativa(body.movimiento);
+    const correlativa = await generarCorrelativa(
+      body.movimiento,
+      body.contrato,
+      body.contratoId
+    );
+    if (!correlativa) {
+      return res.status(500).json({
+        message: "Error al generar la correlativa del movimiento",
+      });
+    }
     body.correlativa = correlativa;
-    await Movimiento.create(body);
+    const reponse = await Movimiento.create(body);
     return res.status(201).json({
       message: `Movimiento de tipo ${body.movimiento} creado exitosamente`,
+      data: reponse,
     });
   } catch (err) {
     return res

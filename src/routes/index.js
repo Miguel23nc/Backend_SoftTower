@@ -74,6 +74,14 @@ const getAllNavesAlmacen = require("../controllers/AllModulos/Almacen/Almacen/ge
 const getAllZonas = require("../controllers/AllModulos/Almacen/Ubicacion/getAllZonas");
 const postZonaAlmacen = require("../controllers/AllModulos/Almacen/Ubicacion/postZona");
 const deleteZonaAlmacen = require("../controllers/AllModulos/Almacen/Ubicacion/deleteZona");
+const postUbicacion = require("../controllers/AllModulos/Almacen/Ubicacion/postUbicacion");
+const postProductosAlmacen = require("../controllers/AllModulos/Almacen/Producto/postProductos");
+const deleteNaveAlmacen = require("../controllers/AllModulos/Almacen/Almacen/deleteAlmacen");
+const deleteSedeAlmacen = require("../controllers/AllModulos/Almacen/Ubicacion/deleteSede");
+const getUbicacionByParams = require("../controllers/AllModulos/Almacen/Ubicacion/getUbicacionBySection");
+const patchUbicacion = require("../controllers/AllModulos/Almacen/Ubicacion/patchUbicacion");
+const postStockAlmacen = require("../controllers/AllModulos/Almacen/Stock/postStock");
+const deleteMovimientoAlmacen = require("../controllers/AllModulos/Almacen/Movimientos/deleteMovimiento");
 
 const router = Router();
 
@@ -102,7 +110,12 @@ router.post("/postSedesAlmacen", postSedesAlmacen);
 router.post("/postMovimientoAlmacen", createMovimiento);
 router.post("/postNavesAlmacen", postAlmacen);
 router.post("/postZonaAlmacen", postZonaAlmacen);
+router.post("/postUbicacionProducto", postUbicacion);
+router.post("/postProductoAlmacen", postProductosAlmacen);
+router.post("/postStockAlmacen", postStockAlmacen);
 
+router.patch("/patchUbicacionProducto", patchUbicacion);
+router.patch("/patchNavesAlmacen", deleteNaveAlmacen);
 router.patch("/patchBusiness", updateBusinessPartial);
 router.patch("/patchCotizacion", updateCotizacionPartial);
 router.patch("/patchEmployee", updateEmployeePartial);
@@ -114,6 +127,7 @@ router.patch("/patchBoletaDePago", patchBoleDePago);
 router.patch("/patchWidget", patchWidget);
 router.patch("/updateWidgetPreference", updateWidgetPreference);
 
+router.delete("/deleteSedesAlmacen", deleteSedeAlmacen);
 router.delete("/deleteBoletaDePago", deleteBoletaDePago);
 router.delete("/deleteClient", deleteClient);
 router.delete("/deleteCotizacion", deleteCotizacion);
@@ -126,10 +140,13 @@ router.delete("/deleteWidget", deleteWidget);
 router.delete("/deleteSubmodule", deleteSubmodule);
 router.delete("/deleteModule", deleteModule);
 router.delete("/deleteZonaAlmacen", deleteZonaAlmacen);
+router.delete("/deleteNavesAlmacen", deleteNaveAlmacen);
+router.delete("/deleteMovimientoAlmacen", deleteMovimientoAlmacen);
 
+router.get("/getUbicacionByParams", getUbicacionByParams);
 router.get("/getAllZonas", getAllZonas);
 router.get("/getNavesAlmacen", getAllNavesAlmacen);
-router.get("/getAllMovimientosBySede/:contratoId", getAllMovimientosBySede);
+router.get("/getAllMovimientosBySede", getAllMovimientosBySede);
 router.get("/getAllSedesAlmacen", getAllSedesAlmacen);
 router.get("/getAllContratoAlmacen", getAllContratos);
 router.get("/getAllNotificaciones", getAllNotificaciones);

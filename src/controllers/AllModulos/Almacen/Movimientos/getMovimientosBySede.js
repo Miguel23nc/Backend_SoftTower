@@ -1,24 +1,28 @@
 const Movimiento = require("../../../../models/AllModulos/Almacen/Movimiento");
 
 const getAllMovimientosBySede = async (req, res) => {
-  const { contratoId } = req.params;
+  const { contratoId, movimiento, page = 0, limit = 10 } = req.query;
+
   try {
     if (!contratoId) {
       return res.status(400).json({
         message: "Falta el ID del contrato para filtrar los movimientos",
       });
     }
-    const movimientosFiltrados = await Movimiento.find({
-      contratoId: contratoId,
-    }).sort({ createdAt: -1 });
-
-    if (movimientosFiltrados.length === 0) {
-      return res.status(404).json({
-        message: "No se encontraron movimientos para esta sede",
-      });
+    const query = { contratoId };
+    if (movimiento && movimiento !== "TODOS") {
+      query.movimiento = movimiento;
     }
 
-    return res.status(200).json(movimientosFiltrados);
+    const [data, total] = await Promise.all([
+      Movimiento.find(query)
+        .skip(page * limit)
+        .limit(parseInt(limit))
+        .sort({ createdAt: -1 }),
+      Movimiento.countDocuments(query),
+    ]);
+
+    return res.json({ data, total });
   } catch (error) {
     return res
       .status(500)

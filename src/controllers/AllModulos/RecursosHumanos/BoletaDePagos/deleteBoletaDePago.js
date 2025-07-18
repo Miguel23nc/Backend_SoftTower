@@ -22,7 +22,6 @@ const deleteBoletaDePago = async (req, res) => {
         correlativa: boletaFound.correlativa,
       });
   } catch (error) {
-    console.error("Error en deleteBoletaDePago:", error);
     return res.status(500).json({ message: error.message });
   }
 };

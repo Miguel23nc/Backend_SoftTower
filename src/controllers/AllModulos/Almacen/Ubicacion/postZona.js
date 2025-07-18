@@ -9,7 +9,12 @@ const postZonaAlmacen = async (req, res) => {
         message: "Faltan datos requeridos para crear la zona",
       });
     }
-
+    const findZona = await Zona.findOne({ nombre, almacenId });
+    if (findZona) {
+      return res.status(400).json({
+        message: "Ya existe una zona con ese nombre en este almacén",
+      });
+    }
     const nuevaZona = {
       nombre,
       almacenId,
@@ -20,9 +25,10 @@ const postZonaAlmacen = async (req, res) => {
         seccionesPorNivel: rack.seccionesPorNivel,
       })),
     };
-    await Zona.create(nuevaZona);
+    const reponse = await Zona.create(nuevaZona);
     return res.status(201).json({
       message: "Zona creada exitosamente",
+      zona: reponse,
     });
   } catch (error) {
     return res.status(500).json({
