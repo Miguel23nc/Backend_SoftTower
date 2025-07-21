@@ -23,9 +23,9 @@ const putContracts = async (req, res) => {
     if (colaborador) updatedContract.colaborador = colaborador;
     if (state) updatedContract.state = state;
     if (codigoSpp) updatedContract.codigoSpp = codigoSpp;
-    if (regimenPension) updatedContract.regimenPension = regimen;
+    if (regimenPension) updatedContract.regimenPension = regimenPension;
 
-    await updatedContract.save({ validateBeforeSave: false });
+    await updatedContract.save();
 
     return res
       .status(200)

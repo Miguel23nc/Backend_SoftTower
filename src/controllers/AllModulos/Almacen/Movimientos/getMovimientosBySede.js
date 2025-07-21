@@ -18,7 +18,20 @@ const getAllMovimientosBySede = async (req, res) => {
       Movimiento.find(query)
         .skip(page * limit)
         .limit(parseInt(limit))
-        .sort({ createdAt: -1 }),
+        .sort({ createdAt: -1 })
+        .populate("contratoId")
+        .populate("sedeId")
+        .populate(
+          "descripcionBienes.productoId",
+          "item cantidad descripcion unidadDeMedida pesoNeto pesoBruto estadoEnvase subItem"
+        )
+        .populate({
+          path: "descripcionBienes.ubicacionId",
+          populate: {
+            path: "zonaId",
+          },
+        })
+        .populate("creadoPor", "name lastname email"),
       Movimiento.countDocuments(query),
     ]);
 

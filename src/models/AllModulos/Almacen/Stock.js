@@ -5,7 +5,7 @@ const stockSchema = new Schema(
   {
     productoId: {
       type: Schema.Types.ObjectId,
-      ref: "ProductoAlmacen",
+      ref: "Producto",
       required: true,
     },
     ubicacionId: {
@@ -15,7 +15,7 @@ const stockSchema = new Schema(
     },
     movimientoId: {
       type: Schema.Types.ObjectId,
-      ref: "MovimientoAlmacen",
+      ref: "Movimiento",
       required: true,
     },
     sedeId: {

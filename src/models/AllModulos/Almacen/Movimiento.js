@@ -29,7 +29,6 @@ const movimientoSchema = new Schema(
           ref: "Producto",
           required: true,
         },
-        cant: { type: Number, required: true },
         ubicacionId: {
           type: Schema.Types.ObjectId,
           ref: "Ubicacion",

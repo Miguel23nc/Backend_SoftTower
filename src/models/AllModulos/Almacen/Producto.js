@@ -4,6 +4,7 @@ const { Schema } = mongoose;
 const productoSchema = new Schema(
   {
     item: { type: String, required: true },
+    cantidad: { type: Number, required: true },
     descripcion: { type: String, required: true },
     unidadDeMedida: { type: String, required: true },
     pesoNeto: String,

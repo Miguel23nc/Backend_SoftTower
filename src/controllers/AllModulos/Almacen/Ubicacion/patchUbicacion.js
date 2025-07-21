@@ -12,23 +12,21 @@ const patchUbicacion = async (req, res) => {
     }
 
     const findUbicacion = await Ubicacion.findById(_id);
-
     if (!findUbicacion) {
-      return res.status(404).json({
-        message: "Ubicación no encontrada",
-      });
+      return res.status(404).json({ message: "Ubicación no encontrada" });
     }
-    const ubicacion = await new Ubicacion({
-      zonaId,
-      porcentaje: porcentaje || findUbicacion.porcentaje,
-      observaciones: observaciones || findUbicacion.observaciones,
-      estado: estado || findUbicacion.estado,
-      actualizadoPor,
-    });
+
+    if (zonaId) findUbicacion.zonaId = zonaId;
+    if (porcentaje !== undefined) findUbicacion.porcentaje = porcentaje;
+    if (observaciones) findUbicacion.observaciones = observaciones;
+    if (estado) findUbicacion.estado = estado;
+    findUbicacion.actualizadoPor = actualizadoPor;
+
+    await findUbicacion.save();
 
     return res.status(200).json({
       message: "Ubicación actualizada exitosamente",
-      ubicacion,
+      ubicacion: findUbicacion,
     });
   } catch (err) {
     return res.status(500).json({
