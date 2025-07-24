@@ -15,7 +15,6 @@ const getAsistenciaByParams = async (req, res) => {
 
     return res.json({ data, total });
   } catch (err) {
-    console.log("Error al buscar las Asistencias:", err);
     return res
       .status(500)
       .json({ message: err.message || "Error al buscar las Asistencias" });
