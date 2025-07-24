@@ -13,6 +13,11 @@ const stockSchema = new Schema(
       ref: "Ubicacion",
       required: true,
     },
+    cantidad: {
+      type: Number,
+      required: true,
+      default: 1,
+    },
     movimientoId: {
       type: Schema.Types.ObjectId,
       ref: "Movimiento",

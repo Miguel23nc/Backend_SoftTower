@@ -18,7 +18,8 @@ const postStockAlmacen = async (req, res) => {
       !movimientoId ||
       !sedeId ||
       !contratoId ||
-      cantidad === undefined
+      cantidad === undefined ||
+      !cantidad
     ) {
       return res.status(400).json({
         message: "Faltan datos requeridos para crear el stock",
@@ -27,6 +28,8 @@ const postStockAlmacen = async (req, res) => {
     const existingStock = await StockAlmacen.findOne({
       productoId,
       ubicacionId,
+      movimientoId,
+      cantidad,
       sedeId,
       contratoId,
     });

@@ -84,6 +84,10 @@ const postStockAlmacen = require("../controllers/AllModulos/Almacen/Stock/postSt
 const deleteMovimientoAlmacen = require("../controllers/AllModulos/Almacen/Movimientos/deleteMovimiento");
 const getStockByParams = require("../controllers/AllModulos/Almacen/Stock/getStockParams");
 const getAsistenciaByParams = require("../controllers/AllModulos/RecursosHumanos/Asistencia/colaborador/getAsistenciaByParams");
+const getProducto = require("../controllers/AllModulos/Almacen/Producto/getProducto");
+const getStockProductoUbicacion = require("../controllers/AllModulos/Almacen/Stock/getStockProductoUbicacion");
+const patchStockAlmacen = require("../controllers/AllModulos/Almacen/Stock/patchStock");
+const patchMovimiento = require("../controllers/AllModulos/Almacen/Movimientos/patchMovimiento");
 
 const router = Router();
 
@@ -116,6 +120,8 @@ router.post("/postUbicacionProducto", postUbicacion);
 router.post("/postProductoAlmacen", postProductosAlmacen);
 router.post("/postStockAlmacen", postStockAlmacen);
 
+router.patch("/patchMovimientoAlmacen", patchMovimiento);
+router.patch("/patchStockAlmacen", patchStockAlmacen);
 router.patch("/patchUbicacionProducto", patchUbicacion);
 router.patch("/patchNavesAlmacen", deleteNaveAlmacen);
 router.patch("/patchBusiness", updateBusinessPartial);
@@ -145,6 +151,8 @@ router.delete("/deleteZonaAlmacen", deleteZonaAlmacen);
 router.delete("/deleteNavesAlmacen", deleteNaveAlmacen);
 router.delete("/deleteMovimientoAlmacen", deleteMovimientoAlmacen);
 
+router.get("/getStockProductoUbicacion", getStockProductoUbicacion);
+router.get("/getProductoAlmacen", getProducto);
 router.get("/getAsistenciaByParams", getAsistenciaByParams);
 router.get("/getStockByParams", getStockByParams);
 router.get("/getUbicacionByParams", getUbicacionByParams);
