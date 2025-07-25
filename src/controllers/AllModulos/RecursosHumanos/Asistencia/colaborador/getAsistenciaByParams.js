@@ -22,7 +22,7 @@ const getAsistenciaByParams = async (req, res) => {
       const colaboradoresIds = colaboradores.map((c) => c._id);
       query.$or = [
         { colaborador: { $in: colaboradoresIds } },
-        { state: regex },
+        { estado: regex },
       ];
     }
 
@@ -38,8 +38,6 @@ const getAsistenciaByParams = async (req, res) => {
 
     return res.json({ data, total });
   } catch (err) {
-    console.log("Error al obtener las asistencias:", err);
-    
     return res
       .status(500)
       .json({ message: err.message || "Error al buscar las Asistencias" });

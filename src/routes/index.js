@@ -89,6 +89,7 @@ const getStockProductoUbicacion = require("../controllers/AllModulos/Almacen/Sto
 const patchStockAlmacen = require("../controllers/AllModulos/Almacen/Stock/patchStock");
 const patchMovimiento = require("../controllers/AllModulos/Almacen/Movimientos/patchMovimiento");
 const getBoletaDePagoByParams = require("../controllers/AllModulos/RecursosHumanos/BoletaDePagos/getBoletaDePagoByParams");
+const getEmployeeByParams = require("../controllers/Employee/getEmployeeByParam");
 
 const router = Router();
 
@@ -152,6 +153,7 @@ router.delete("/deleteZonaAlmacen", deleteZonaAlmacen);
 router.delete("/deleteNavesAlmacen", deleteNaveAlmacen);
 router.delete("/deleteMovimientoAlmacen", deleteMovimientoAlmacen);
 
+router.get("/getEmployeeByParams", getEmployeeByParams);
 router.get("/getBoletaDePagoByParams", getBoletaDePagoByParams);
 router.get("/getStockProductoUbicacion", getStockProductoUbicacion);
 router.get("/getProductoAlmacen", getProducto);

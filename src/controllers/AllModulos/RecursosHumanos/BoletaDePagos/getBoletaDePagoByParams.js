@@ -6,7 +6,13 @@ function escapeRegExp(string) {
 }
 
 const getBoletaDePagoByParams = async (req, res) => {
-  const { page = 0, limit = 10, search = "" } = req.query;
+  const {
+    page = 0,
+    limit = 10,
+    search = "",
+    empresa = "",
+    fechaBoletaDePago = "",
+  } = req.query;
 
   try {
     const query = {};
@@ -43,6 +49,29 @@ const getBoletaDePagoByParams = async (req, res) => {
         },
       ];
     }
+    if (empresa) {
+
+      const empleadosEmpresa = await Employee.find({
+        business: empresa,
+      }).select("_id");
+
+      const empleadosEmpresaIds = empleadosEmpresa.map((e) => e._id);
+
+      // Si ya hay una condición $or por búsqueda, la combinamos
+      if (query.$or) {
+        query.$and = [
+          { $or: query.$or },
+          { colaborador: { $in: empleadosEmpresaIds } },
+        ];
+        delete query.$or;
+      } else {
+        query.colaborador = { $in: empleadosEmpresaIds };
+      }
+    }
+    if (fechaBoletaDePago) {
+      const regex = new RegExp(escapeRegExp(fechaBoletaDePago), "i");
+      query.fechaBoletaDePago = regex;
+    }
 
     const [data, total] = await Promise.all([
       BoletaDePagos.find(query)
@@ -56,7 +85,6 @@ const getBoletaDePagoByParams = async (req, res) => {
 
     return res.json({ data, total });
   } catch (error) {
-    console.error("Error al obtener las boletas de pago:", error);
     return res.status(500).json({
       message: error.message || "Error al obtener las boletas de pago",
     });

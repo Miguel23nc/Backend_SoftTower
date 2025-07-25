@@ -1,7 +1,15 @@
 const Movimiento = require("../../../../models/AllModulos/Almacen/Movimiento");
-
+const escapeRegExp = (string) => {
+  return string.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+};
 const getAllMovimientosBySede = async (req, res) => {
-  const { contratoId, movimiento, page = 0, limit = 10 } = req.query;
+  const {
+    contratoId,
+    movimiento,
+    page = 0,
+    limit = 10,
+    search = "",
+  } = req.query;
 
   try {
     if (!contratoId) {
@@ -13,7 +21,24 @@ const getAllMovimientosBySede = async (req, res) => {
     if (movimiento && movimiento !== "TODOS") {
       query.movimiento = movimiento;
     }
+    if (search) {
+      const safeSearch = escapeRegExp(search);
+      const regex = new RegExp(safeSearch, "i");
+      const movimientos = await Movimiento.find({
+        $or: [
+          { movimiento: regex },
+          { correlativa: regex },
+          { numeroDeActa: regex },
+          { contribuyente: regex },
+          { "datosGenerales.fecha": regex },
+          { "datosGenerales.recepcionadoPor": regex },
+          { "datosGenerales.responsableEntrega": regex },
+        ],
+      }).select("_id");
 
+      const movimientosIds = movimientos.map((c) => c._id);
+      query.$or = [{ _id: { $in: movimientosIds } }];
+    }
     const [data, total] = await Promise.all([
       Movimiento.find(query)
         .skip(page * limit)
@@ -31,7 +56,8 @@ const getAllMovimientosBySede = async (req, res) => {
             path: "zonaId",
           },
         })
-        .populate("creadoPor", "name lastname email"),
+        .populate("creadoPor", "name lastname email")
+        .lean(),
       Movimiento.countDocuments(query),
     ]);
 
