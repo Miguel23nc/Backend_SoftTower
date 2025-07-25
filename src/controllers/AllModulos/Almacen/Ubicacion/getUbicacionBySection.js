@@ -4,7 +4,7 @@ const Ubicacion = require("../../../../models/AllModulos/Almacen/Ubicacion");
 
 const getUbicacionByParams = async (req, res) => {
   try {
-    const { zonaId, rack, nivel, seccion } = req.query;
+    const { zonaId, rack, nivel, seccion, almacenId } = req.query;
 
     const query = {};
     if (zonaId) query.zonaId = zonaId;
@@ -12,7 +12,12 @@ const getUbicacionByParams = async (req, res) => {
     if (nivel) query.nivel = parseInt(nivel);
     if (seccion) query.seccion = parseInt(seccion);
 
-    const ubicacion = await Ubicacion.find(query);
+    let ubicacion = await Ubicacion.find(query).populate("zonaId");
+    if (almacenId) {
+      ubicacion = ubicacion.filter(
+        (u) => u.zonaId && u.zonaId.almacenId?.toString() === almacenId
+      );
+    }
 
     if (!ubicacion) {
       return res.status(404).json({ message: "Ubicación no encontrada" });
