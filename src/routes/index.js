@@ -92,6 +92,7 @@ const getBoletaDePagoByParams = require("../controllers/AllModulos/RecursosHuman
 const getEmployeeByParams = require("../controllers/Employee/getEmployeeByParam");
 const getZonasByParams = require("../controllers/AllModulos/Almacen/Ubicacion/getZonaByParams");
 const getNavesBySede = require("../controllers/AllModulos/Almacen/Almacen/getNavesBySede");
+const getMovimientoByCodigo = require("../controllers/AllModulos/Almacen/Movimientos/getMovimientoByCodigo");
 
 const router = Router();
 
@@ -155,6 +156,7 @@ router.delete("/deleteZonaAlmacen", deleteZonaAlmacen);
 router.delete("/deleteNavesAlmacen", deleteNaveAlmacen);
 router.delete("/deleteMovimientoAlmacen", deleteMovimientoAlmacen);
 
+router.get("/getMovimientoByCodigo", getMovimientoByCodigo);
 router.get("/getNavesBySede", getNavesBySede);
 router.get("/getZonasByParams", getZonasByParams);
 router.get("/getEmployeeByParams", getEmployeeByParams);
