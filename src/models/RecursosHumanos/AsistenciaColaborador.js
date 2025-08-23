@@ -16,13 +16,25 @@ const asistenciaColaboradorSchema = new Schema(
       type: String,
       required: true,
     },
+    sedeIngreso: {
+      type: String,
+    },
     salida: {
+      type: String,
+    },
+    sedeSalida: {
       type: String,
     },
     inicioAlmuerzo: {
       type: String,
     },
+    sedeAlmuerzo: {
+      type: String,
+    },
     finAlmuerzo: {
+      type: String,
+    },
+    sedeFinAlmuerzo: {
       type: String,
     },
     minTarde: {
