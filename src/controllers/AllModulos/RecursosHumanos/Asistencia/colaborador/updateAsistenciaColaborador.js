@@ -24,6 +24,8 @@ const updateAsistenciaColaborador = async (req, res) => {
     console.log("body", req.body);
 
     if (dni) {
+      console.log("dni", dni);
+
       const findColaborador = await Employee.findOne({ documentNumber: dni });
       if (!findColaborador) {
         return res.status(404).json({ message: "Colaborador no encontrado" });
@@ -40,6 +42,7 @@ const updateAsistenciaColaborador = async (req, res) => {
         fecha: fecha,
       });
     }
+    console.log("findAsistenciaColaborador", findAsistenciaColaborador);
 
     if (!findAsistenciaColaborador) {
       return res
