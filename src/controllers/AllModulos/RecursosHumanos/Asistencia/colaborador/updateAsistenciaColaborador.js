@@ -77,6 +77,10 @@ const updateAsistenciaColaborador = async (req, res) => {
       findAsistenciaColaborador.ingreso = ingreso;
       findAsistenciaColaborador.minTarde = minTarde;
       findAsistenciaColaborador.estado = state;
+      console.log("findAsistenciaColaborador", findAsistenciaColaborador);
+      console.log("ingresoSede", ingresoSede);
+      console.log("body", req.body);
+
       if (ingresoSede) findAsistenciaColaborador.ingresoSede = ingresoSede;
     }
 
