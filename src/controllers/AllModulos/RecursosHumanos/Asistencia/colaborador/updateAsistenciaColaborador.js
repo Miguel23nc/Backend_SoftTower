@@ -86,6 +86,8 @@ const updateAsistenciaColaborador = async (req, res) => {
     }
 
     if (salida) {
+      console.log("entro a salida");
+
       let horasExtras = 0;
       const fechaValida = dayjs(fecha, "DD/MM/YYYY", true);
       if (!fechaValida.isValid()) {
@@ -103,7 +105,15 @@ const updateAsistenciaColaborador = async (req, res) => {
       }
       findAsistenciaColaborador.salida = salida;
       findAsistenciaColaborador.minExtras = horasExtras;
-      if (salidaSede) findAsistenciaColaborador.salidaSede = salidaSede;
+      console.log("Hay SalidaSede", salidaSede);
+
+      if (salidaSede) {
+        findAsistenciaColaborador.salidaSede = salidaSede;
+        console.log(
+          "findAsistenciaColaborador.salidaSede",
+          findAsistenciaColaborador.salidaSede
+        );
+      }
     }
 
     if (colaborador) findAsistenciaColaborador.colaborador = colaborador;
