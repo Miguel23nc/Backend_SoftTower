@@ -8,9 +8,13 @@ const updateAsistenciaColaborador = async (req, res) => {
     colaborador,
     fecha,
     ingreso,
+    ingresoSede,
     salida,
+    salidaSede,
     inicioAlmuerzo,
+    almuerzoSede,
     finAlmuerzo,
+    finAlmuerzoSede,
     dni,
   } = req.body;
   //necesito saber que se cambió, si se cambió el ingreso o la salida se cambia, miniTarde o minExtras
@@ -73,6 +77,7 @@ const updateAsistenciaColaborador = async (req, res) => {
       findAsistenciaColaborador.ingreso = ingreso;
       findAsistenciaColaborador.minTarde = minTarde;
       findAsistenciaColaborador.estado = state;
+      if (ingresoSede) findAsistenciaColaborador.ingresoSede = ingresoSede;
     }
 
     if (salida) {
@@ -93,13 +98,20 @@ const updateAsistenciaColaborador = async (req, res) => {
       }
       findAsistenciaColaborador.salida = salida;
       findAsistenciaColaborador.minExtras = horasExtras;
+      if (salidaSede) findAsistenciaColaborador.salidaSede = salidaSede;
     }
 
     if (colaborador) findAsistenciaColaborador.colaborador = colaborador;
     if (fecha) findAsistenciaColaborador.fecha = fecha;
-    if (inicioAlmuerzo)
+    if (inicioAlmuerzo) {
       findAsistenciaColaborador.inicioAlmuerzo = inicioAlmuerzo;
-    if (finAlmuerzo) findAsistenciaColaborador.finAlmuerzo = finAlmuerzo;
+      if (almuerzoSede) findAsistenciaColaborador.almuerzoSede = almuerzoSede;
+    }
+    if (finAlmuerzo) {
+      findAsistenciaColaborador.finAlmuerzo = finAlmuerzo;
+      if (finAlmuerzoSede)
+        findAsistenciaColaborador.finAlmuerzoSede = finAlmuerzoSede;
+    }
 
     await findAsistenciaColaborador.save();
 
