@@ -21,6 +21,7 @@ const updateAsistenciaColaborador = async (req, res) => {
   try {
     let findAsistenciaColaborador;
     let ingresoConDni = false;
+    console.log("body", req.body);
 
     if (dni) {
       const findColaborador = await Employee.findOne({ documentNumber: dni });
