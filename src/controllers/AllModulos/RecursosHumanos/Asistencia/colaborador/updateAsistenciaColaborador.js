@@ -17,7 +17,6 @@ const updateAsistenciaColaborador = async (req, res) => {
     finAlmuerzoSede,
     dni,
   } = req.body;
-  //necesito saber que se cambió, si se cambió el ingreso o la salida se cambia, miniTarde o minExtras
   try {
     let findAsistenciaColaborador;
     let ingresoConDni = false;
@@ -45,7 +44,6 @@ const updateAsistenciaColaborador = async (req, res) => {
         .status(404)
         .json({ message: "No se encontró esta asistencia" });
     }
-    console.log("ingresoConDni", ingresoConDni);
 
     if (ingresoConDni) {
       if (inicioAlmuerzo && findAsistenciaColaborador.inicioAlmuerzo)
@@ -61,14 +59,12 @@ const updateAsistenciaColaborador = async (req, res) => {
           message: "No se puede modificar la Salida",
         });
     }
-    console.log("Llegando a ingreso");
 
     if (ingreso) {
       let minTarde = 0;
       let state;
       const horaLimite = dayjs("08:00 AM", "hh:mm A");
       const horaIngreso = dayjs(ingreso, "hh:mm A");
-      console.log("horaingreso.isAfter", horaIngreso.isAfter(horaLimite));
 
       if (horaIngreso.isAfter(horaLimite)) {
         state = "TARDANZA";
@@ -79,17 +75,11 @@ const updateAsistenciaColaborador = async (req, res) => {
       findAsistenciaColaborador.ingreso = ingreso;
       findAsistenciaColaborador.minTarde = minTarde;
       findAsistenciaColaborador.estado = state;
-      console.log("findAsistenciaColaborador", findAsistenciaColaborador);
-      console.log("ingresoSede", ingresoSede);
-      console.log("body", req.body);
 
       if (ingresoSede) findAsistenciaColaborador.ingresoSede = ingresoSede;
     }
-    console.log("Llegando a salida");
 
     if (salida) {
-      console.log("entro a salida");
-
       let horasExtras = 0;
       const fechaValida = dayjs(fecha, "DD/MM/YYYY", true);
       if (!fechaValida.isValid()) {
@@ -107,17 +97,11 @@ const updateAsistenciaColaborador = async (req, res) => {
       }
       findAsistenciaColaborador.salida = salida;
       findAsistenciaColaborador.minExtras = horasExtras;
-      console.log("Hay SalidaSede", salidaSede);
 
       if (salidaSede) {
         findAsistenciaColaborador.salidaSede = salidaSede;
-        console.log(
-          "findAsistenciaColaborador.salidaSede",
-          findAsistenciaColaborador.salidaSede
-        );
       }
     }
-    console.log("Llegando a almuerzo");
     if (colaborador) findAsistenciaColaborador.colaborador = colaborador;
     if (fecha) findAsistenciaColaborador.fecha = fecha;
     if (inicioAlmuerzo) {
