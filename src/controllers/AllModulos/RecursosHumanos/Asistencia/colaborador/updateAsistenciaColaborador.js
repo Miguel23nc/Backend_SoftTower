@@ -21,11 +21,8 @@ const updateAsistenciaColaborador = async (req, res) => {
   try {
     let findAsistenciaColaborador;
     let ingresoConDni = false;
-    console.log("body", req.body);
 
     if (dni) {
-      console.log("dni", dni);
-
       const findColaborador = await Employee.findOne({ documentNumber: dni });
       if (!findColaborador) {
         return res.status(404).json({ message: "Colaborador no encontrado" });
@@ -42,13 +39,13 @@ const updateAsistenciaColaborador = async (req, res) => {
         fecha: fecha,
       });
     }
-    console.log("findAsistenciaColaborador", findAsistenciaColaborador);
 
     if (!findAsistenciaColaborador) {
       return res
         .status(404)
         .json({ message: "No se encontró esta asistencia" });
     }
+    console.log("ingresoConDni", ingresoConDni);
 
     if (ingresoConDni) {
       if (inicioAlmuerzo && findAsistenciaColaborador.inicioAlmuerzo)
@@ -64,6 +61,7 @@ const updateAsistenciaColaborador = async (req, res) => {
           message: "No se puede modificar la Salida",
         });
     }
+    console.log("Llegando a ingreso");
 
     if (ingreso) {
       let minTarde = 0;
@@ -87,6 +85,7 @@ const updateAsistenciaColaborador = async (req, res) => {
 
       if (ingresoSede) findAsistenciaColaborador.ingresoSede = ingresoSede;
     }
+    console.log("Llegando a salida");
 
     if (salida) {
       console.log("entro a salida");
@@ -118,7 +117,7 @@ const updateAsistenciaColaborador = async (req, res) => {
         );
       }
     }
-
+    console.log("Llegando a almuerzo");
     if (colaborador) findAsistenciaColaborador.colaborador = colaborador;
     if (fecha) findAsistenciaColaborador.fecha = fecha;
     if (inicioAlmuerzo) {
@@ -133,7 +132,9 @@ const updateAsistenciaColaborador = async (req, res) => {
 
     await findAsistenciaColaborador.save();
 
-    res.status(200).json({ message: "Asistencia del colaborador actualizada" });
+    return res
+      .status(200)
+      .json({ message: "Asistencia del colaborador actualizada" });
   } catch (error) {
     return res.status(500).json({ message: error.message });
   }
