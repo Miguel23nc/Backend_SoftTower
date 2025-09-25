@@ -1,31 +1,17 @@
 const Producto = require("../../../../models/AllModulos/Almacen/Producto");
 
 const postProductosAlmacen = async (req, res) => {
-  const {
-    item,
-    cantidad,
-    descripcion,
-    unidadDeMedida,
-    pesoNeto,
-    pesoBruto,
-    estadoEnvase,
-    subItem,
-  } = req.body;
+  const { descripcion, unidadDeMedida, subItem } = req.body;
 
   try {
-    if (!item || !descripcion || !unidadDeMedida) {
+    if (!descripcion || !unidadDeMedida) {
       return res.status(400).json({
         message: "Faltan datos requeridos para crear el producto",
       });
     }
     const nuevoProducto = {
-      item,
-      cantidad,
       descripcion,
       unidadDeMedida,
-      pesoNeto,
-      pesoBruto,
-      estadoEnvase,
       subItem,
     };
     const response = await Producto.create(nuevoProducto);

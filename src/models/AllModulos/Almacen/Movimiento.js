@@ -24,16 +24,17 @@ const movimientoSchema = new Schema(
     },
     descripcionBienes: [
       {
+        item: Number,
         productoId: {
           type: Schema.Types.ObjectId,
-          ref: "Producto",
+          ref: "ProductoAlmacen",
           required: true,
         },
-        ubicacionId: {
-          type: Schema.Types.ObjectId,
-          ref: "Ubicacion",
-          required: true,
-        },
+        cantidad: { type: Number, required: true },
+        pesoNeto: String,
+        pesoBruto: String,
+        estadoEnvase: String,
+        observaciones: String,
       },
     ],
     detallesDePeso: String,

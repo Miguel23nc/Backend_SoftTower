@@ -36,7 +36,7 @@ const getAsistenciaByParams = async (req, res) => {
       AsistenciaColaborador.countDocuments(query),
     ]);
 
-    return res.json({ data, total });
+    return res.status(200).json({ data, total });
   } catch (err) {
     return res
       .status(500)

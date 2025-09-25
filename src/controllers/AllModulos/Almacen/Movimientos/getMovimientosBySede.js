@@ -50,12 +50,6 @@ const getAllMovimientosBySede = async (req, res) => {
           "descripcionBienes.productoId",
           "item cantidad descripcion unidadDeMedida pesoNeto pesoBruto estadoEnvase subItem"
         )
-        .populate({
-          path: "descripcionBienes.ubicacionId",
-          populate: {
-            path: "zonaId",
-          },
-        })
         .populate("creadoPor", "name lastname email")
         .lean(),
       Movimiento.countDocuments(query),

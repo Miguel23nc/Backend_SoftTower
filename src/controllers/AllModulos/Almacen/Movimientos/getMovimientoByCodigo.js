@@ -9,8 +9,6 @@ const getMovimientoByCodigo = async (req, res) => {
         message: "El código de ingreso es requerido",
       });
     }
-    console.log("codigoIngreso", codigoIngreso);
-
     const response = await Movimiento.findOne({
       correlativa: String(codigoIngreso),
     })
@@ -19,18 +17,11 @@ const getMovimientoByCodigo = async (req, res) => {
         "descripcionBienes.productoId",
         "item cantidad descripcion unidadDeMedida pesoNeto pesoBruto estadoEnvase subItem"
       )
-      .populate({
-        path: "descripcionBienes.ubicacionId",
-        populate: {
-          path: "zonaId",
-        },
-      })
       .populate("creadoPor", "name lastname email")
       .lean();
 
     return res.status(200).json(response);
   } catch (error) {
-    console.error("Error al obtener el movimiento por código:", error);
     return res
       .status(500)
       .json({ message: error.message || "Error al obtener los movimientos" });

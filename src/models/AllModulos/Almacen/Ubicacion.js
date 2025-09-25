@@ -8,6 +8,16 @@ const ubicacionSchema = new Schema(
       ref: "Zona",
       required: true,
     },
+    productos: [
+      {
+        productoId: {
+          type: Schema.Types.ObjectId,
+          ref: "ProductoAlmacen",
+          required: true,
+        },
+        cantidad: Number,
+      },
+    ],
     rack: String,
     nivel: Number,
     seccion: Number,

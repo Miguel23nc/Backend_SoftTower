@@ -12,7 +12,9 @@ const getUbicacionByParams = async (req, res) => {
     if (nivel) query.nivel = parseInt(nivel);
     if (seccion) query.seccion = parseInt(seccion);
 
-    let ubicacion = await Ubicacion.find(query).populate("zonaId");
+    let ubicacion = await Ubicacion.find(query)
+      .populate("zonaId")
+      .populate("productos.productoId");
     if (almacenId) {
       ubicacion = ubicacion.filter(
         (u) => u.zonaId && u.zonaId.almacenId?.toString() === almacenId

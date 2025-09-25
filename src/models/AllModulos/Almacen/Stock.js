@@ -5,15 +5,10 @@ const stockSchema = new Schema(
   {
     productoId: {
       type: Schema.Types.ObjectId,
-      ref: "Producto",
+      ref: "ProductoAlmacen",
       required: true,
     },
-    ubicacionId: {
-      type: Schema.Types.ObjectId,
-      ref: "Ubicacion",
-      required: true,
-    },
-    cantidad: {
+    cantidadTotal: {
       type: Number,
       required: true,
       default: 1,
@@ -36,11 +31,11 @@ const stockSchema = new Schema(
 
     creadoPor: {
       type: Schema.Types.ObjectId,
-      ref: "User",
+      ref: "Employee",
     },
     actualizadoPor: {
       type: Schema.Types.ObjectId,
-      ref: "User",
+      ref: "Employee",
     },
   },
   {

@@ -1,20 +1,12 @@
 const StockAlmacen = require("../../../../models/AllModulos/Almacen/Stock");
 
 const postStockAlmacen = async (req, res) => {
-  const {
-    productoId,
-    ubicacionId,
-    movimientoId,
-    sedeId,
-    contratoId,
-    cantidad,
-    creadoPor,
-  } = req.body;
+  const { productoId, movimientoId, sedeId, contratoId, cantidad, creadoPor } =
+    req.body;
 
   try {
     if (
       !productoId ||
-      !ubicacionId ||
       !movimientoId ||
       !sedeId ||
       !contratoId ||
@@ -27,11 +19,6 @@ const postStockAlmacen = async (req, res) => {
     }
     const existingStock = await StockAlmacen.findOne({
       productoId,
-      ubicacionId,
-      movimientoId,
-      cantidad,
-      sedeId,
-      contratoId,
     });
 
     if (existingStock) {
@@ -42,8 +29,7 @@ const postStockAlmacen = async (req, res) => {
     }
     const nuevaStock = {
       productoId,
-      cantidad,
-      ubicacionId,
+      cantidadTotal: cantidad,
       movimientoId,
       sedeId,
       contratoId,

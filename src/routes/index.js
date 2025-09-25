@@ -93,6 +93,7 @@ const getEmployeeByParams = require("../controllers/Employee/getEmployeeByParam"
 const getZonasByParams = require("../controllers/AllModulos/Almacen/Ubicacion/getZonaByParams");
 const getNavesBySede = require("../controllers/AllModulos/Almacen/Almacen/getNavesBySede");
 const getMovimientoByCodigo = require("../controllers/AllModulos/Almacen/Movimientos/getMovimientoByCodigo");
+const getStockAlmacen = require("../controllers/AllModulos/Almacen/Stock/getStock");
 
 const router = Router();
 
@@ -165,6 +166,7 @@ router.get("/getStockProductoUbicacion", getStockProductoUbicacion);
 router.get("/getProductoAlmacen", getProducto);
 router.get("/getAsistenciaByParams", getAsistenciaByParams);
 router.get("/getStockByParams", getStockByParams);
+router.get("/getStockAlmacen", getStockAlmacen);
 router.get("/getUbicacionByParams", getUbicacionByParams);
 router.get("/getAllZonas", getAllZonas);
 router.get("/getNavesAlmacen", getAllNavesAlmacen);
