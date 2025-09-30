@@ -27,7 +27,7 @@ const postUbicacion = async (req, res) => {
             rack: nombre,
             nivel,
             seccion,
-            porcentaje: porcentaje || "0%",
+            porcentaje: porcentaje || 0,
             observaciones: observaciones || "",
             estado: estado || "LIBRE",
             creadoPor,

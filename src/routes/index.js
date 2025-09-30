@@ -94,6 +94,9 @@ const getZonasByParams = require("../controllers/AllModulos/Almacen/Ubicacion/ge
 const getNavesBySede = require("../controllers/AllModulos/Almacen/Almacen/getNavesBySede");
 const getMovimientoByCodigo = require("../controllers/AllModulos/Almacen/Movimientos/getMovimientoByCodigo");
 const getStockAlmacen = require("../controllers/AllModulos/Almacen/Stock/getStock");
+const getNavesPagination = require("../controllers/AllModulos/Almacen/Almacen/getNavesPagination");
+const getZonaPagination = require("../controllers/AllModulos/Almacen/Ubicacion/getZonaPagination");
+const getSedePagination = require("../controllers/AllModulos/Almacen/Ubicacion/getSedePagination");
 
 const router = Router();
 
@@ -157,6 +160,9 @@ router.delete("/deleteZonaAlmacen", deleteZonaAlmacen);
 router.delete("/deleteNavesAlmacen", deleteNaveAlmacen);
 router.delete("/deleteMovimientoAlmacen", deleteMovimientoAlmacen);
 
+router.get("/getNavesAlmacenPagination", getNavesPagination);
+router.get("/getSedesAlmacenPagination", getSedePagination);
+router.get("/getZonasPagination", getZonaPagination);
 router.get("/getMovimientoByCodigo", getMovimientoByCodigo);
 router.get("/getNavesBySede", getNavesBySede);
 router.get("/getZonasByParams", getZonasByParams);

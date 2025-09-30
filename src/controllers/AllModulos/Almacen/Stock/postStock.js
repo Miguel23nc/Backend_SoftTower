@@ -1,8 +1,15 @@
 const StockAlmacen = require("../../../../models/AllModulos/Almacen/Stock");
 
 const postStockAlmacen = async (req, res) => {
-  const { productoId, movimientoId, sedeId, contratoId, cantidad, creadoPor } =
-    req.body;
+  const {
+    productoId,
+    movimientoId,
+    sedeId,
+    contratoId,
+    cantidadTotal,
+    cantidadDisponible,
+    creadoPor,
+  } = req.body;
 
   try {
     if (
@@ -10,8 +17,10 @@ const postStockAlmacen = async (req, res) => {
       !movimientoId ||
       !sedeId ||
       !contratoId ||
-      cantidad === undefined ||
-      !cantidad
+      cantidadTotal === undefined ||
+      !cantidadTotal ||
+      cantidadDisponible === undefined ||
+      !cantidadDisponible
     ) {
       return res.status(400).json({
         message: "Faltan datos requeridos para crear el stock",
@@ -29,7 +38,8 @@ const postStockAlmacen = async (req, res) => {
     }
     const nuevaStock = {
       productoId,
-      cantidadTotal: cantidad,
+      cantidadTotal,
+      cantidadDisponible,
       movimientoId,
       sedeId,
       contratoId,

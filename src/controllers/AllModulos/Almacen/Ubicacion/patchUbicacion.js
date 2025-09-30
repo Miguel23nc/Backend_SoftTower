@@ -1,8 +1,16 @@
 const Ubicacion = require("../../../../models/AllModulos/Almacen/Ubicacion");
 
 const patchUbicacion = async (req, res) => {
-  const { _id, zonaId, porcentaje, observaciones, estado, actualizadoPor } =
-    req.body;
+  const {
+    _id,
+    zonaId,
+    productos,
+
+    porcentaje,
+    observaciones,
+    estado,
+    actualizadoPor,
+  } = req.body;
 
   try {
     if (!actualizadoPor || !_id) {
@@ -17,6 +25,7 @@ const patchUbicacion = async (req, res) => {
     }
 
     if (zonaId) findUbicacion.zonaId = zonaId;
+    if (productos) findUbicacion.productos = productos;
     if (porcentaje !== undefined) findUbicacion.porcentaje = porcentaje;
     if (observaciones) findUbicacion.observaciones = observaciones;
     if (estado) findUbicacion.estado = estado;

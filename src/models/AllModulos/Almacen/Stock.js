@@ -10,8 +10,9 @@ const stockSchema = new Schema(
     },
     cantidadTotal: {
       type: Number,
-      required: true,
-      default: 1,
+    },
+    cantidadDisponible: {
+      type: Number,
     },
     movimientoId: {
       type: Schema.Types.ObjectId,

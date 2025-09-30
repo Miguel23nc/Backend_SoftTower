@@ -21,7 +21,7 @@ const ubicacionSchema = new Schema(
     rack: String,
     nivel: Number,
     seccion: Number,
-    porcentaje: String,
+    porcentaje: { type: Number, default: 0 },
     observaciones: String,
     estado: {
       type: String,

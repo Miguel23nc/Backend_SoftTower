@@ -6,23 +6,27 @@ const patchStockAlmacen = async (req, res) => {
       _id,
       productoId,
       ubicacionId,
-      cantidad,
+      cantidadTotal,
+      cantidadDisponible,
       movimientoId,
       sedeId,
       contratoId,
       actualizadoPor,
     } = req.body;
-    if (!_id) {
+    if (!_id && !productoId) {
       return res.status(400).json({
-        message: "ID del Stock es requerido",
+        message: "ID del Stock o Producto es requerido",
       });
     }
-    console.log("cantidad", cantidad);
 
-    const findStock = await StockAlmacen.findById(_id);
+    const findStock = await StockAlmacen.findOne(
+      _id ? { _id } : { productoId }
+    );
     if (productoId) findStock.productoId = productoId;
     if (ubicacionId) findStock.ubicacionId = ubicacionId;
-    if (cantidad !== undefined) findStock.cantidadTotal = cantidad;
+    if (cantidadTotal !== undefined) findStock.cantidadTotal = cantidadTotal;
+    if (cantidadDisponible !== undefined)
+      findStock.cantidadDisponible = cantidadDisponible;
     if (movimientoId) findStock.movimientoId = movimientoId;
     if (sedeId) findStock.sedeId = sedeId;
     if (contratoId) findStock.contratoId = contratoId;
