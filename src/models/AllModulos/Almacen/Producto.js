@@ -3,7 +3,6 @@ const { Schema } = mongoose;
 
 const productoAlmacenSchema = new Schema(
   {
-    // sku: { type: String, required: true, unique: true },
     descripcion: { type: String, required: true },
     unidadDeMedida: { type: String, required: true },
     subItem: {

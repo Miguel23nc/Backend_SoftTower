@@ -2,7 +2,8 @@ const InventarioSistemas = require("../../../../models/AllModulos/SISTEMAS/Inven
 
 const postInventarioSistemas = async (req, res) => {
   const {
-    name,
+    categoria,
+    marca,
     modelo,
     especificaciones,
     area,
@@ -15,7 +16,8 @@ const postInventarioSistemas = async (req, res) => {
   } = req.body;
   try {
     if (
-      !name ||
+      !categoria ||
+      !marca ||
       !modelo ||
       !especificaciones ||
       !area ||
@@ -27,9 +29,21 @@ const postInventarioSistemas = async (req, res) => {
     ) {
       return res.status(400).json({ message: "Faltan datos" });
     }
+    const existingItem = await InventarioSistemas.findOne({
+      codigo,
+      categoria,
+      marca,
+      modelo,
+    });
+    if (existingItem) {
+      return res
+        .status(400)
+        .json({ message: "El inventario ya existe en el sistema" });
+    }
 
     const newInventario = new InventarioSistemas({
-      name,
+      categoria,
+      marca,
       modelo,
       especificaciones,
       area,
@@ -44,7 +58,6 @@ const postInventarioSistemas = async (req, res) => {
     await newInventario.save();
     res.status(201).json({ message: "Inventario creado", data: newInventario });
   } catch (error) {
-    console.error(error);
     res.status(500).json({ message: error.message });
   }
 };

@@ -20,6 +20,8 @@ const postProductosAlmacen = async (req, res) => {
       producto: response,
     });
   } catch (error) {
+    console.log("Error al crear el producto:", error);
+    
     return res.status(500).json({
       message: error.message || "Error al crear el producto",
     });

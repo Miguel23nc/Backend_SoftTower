@@ -97,6 +97,9 @@ const getStockAlmacen = require("../controllers/AllModulos/Almacen/Stock/getStoc
 const getNavesPagination = require("../controllers/AllModulos/Almacen/Almacen/getNavesPagination");
 const getZonaPagination = require("../controllers/AllModulos/Almacen/Ubicacion/getZonaPagination");
 const getSedePagination = require("../controllers/AllModulos/Almacen/Ubicacion/getSedePagination");
+const deleteContratoAlmacen = require("../controllers/AllModulos/Almacen/Contrato/deleteContrato");
+const getContratoAlmacenPagination = require("../controllers/AllModulos/Almacen/Contrato/getContratoPagiancion");
+const deleteStockAlmacen = require("../controllers/AllModulos/Almacen/Stock/deleteStockAlmacen");
 
 const router = Router();
 
@@ -159,7 +162,10 @@ router.delete("/deleteModule", deleteModule);
 router.delete("/deleteZonaAlmacen", deleteZonaAlmacen);
 router.delete("/deleteNavesAlmacen", deleteNaveAlmacen);
 router.delete("/deleteMovimientoAlmacen", deleteMovimientoAlmacen);
+router.delete("/deleteContratoAlmacen", deleteContratoAlmacen);
+router.delete("/deleteStockAlmacen", deleteStockAlmacen);
 
+router.get("/getContratosAlmacenPagination", getContratoAlmacenPagination);
 router.get("/getNavesAlmacenPagination", getNavesPagination);
 router.get("/getSedesAlmacenPagination", getSedePagination);
 router.get("/getZonasPagination", getZonaPagination);

@@ -1,9 +1,18 @@
 const mongoose = require("mongoose");
 const { Schema } = mongoose;
 
-const inventarioSchema = new Schema(
+const inventarioSistemasSchema = new Schema(
   {
-    name: {
+    codigo: {
+      type: String,
+      unique: true,
+      required: true,
+    },
+    categoria: {
+      type: String,
+      required: true,
+    },
+    marca: {
       type: String,
       required: true,
     },
@@ -48,6 +57,9 @@ const inventarioSchema = new Schema(
   { timestamps: true }
 );
 
-const InventarioSistemas = mongoose.model("Inventario", inventarioSchema);
+const InventarioSistemas = mongoose.model(
+  "InventarioSistemas",
+  inventarioSistemasSchema
+);
 
 module.exports = InventarioSistemas;
