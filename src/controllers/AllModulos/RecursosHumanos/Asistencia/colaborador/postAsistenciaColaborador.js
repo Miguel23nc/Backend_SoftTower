@@ -70,7 +70,6 @@ const postAsistenciaColaborador = async (req, res) => {
     if (!estado) {
       const horaLimite = dayjs("08:00 AM", "hh:mm A");
       const horaIngreso = dayjs(ingreso, "hh:mm A");
-      console.log("horaingreso.isAfter", horaIngreso.isAfter(horaLimite));
 
       if (horaIngreso.isAfter(horaLimite)) {
         state = "TARDANZA";

@@ -4,7 +4,11 @@ const getZonasByParams = async (req, res) => {
   const { almacenId } = req.query;
 
   try {
-    const response = await Zona.find(almacenId);
+    if (!almacenId) {
+      return res.status(400).json({ message: "almacenId es requerido" });
+    }
+
+    const response = await Zona.find({ almacenId: almacenId });
 
     return res.json(response);
   } catch (error) {
