@@ -2,6 +2,7 @@ const InventarioSistemas = require("../../../../models/AllModulos/SISTEMAS/Inven
 
 const postInventarioSistemas = async (req, res) => {
   const {
+    codigo,
     categoria,
     marca,
     modelo,
@@ -16,6 +17,7 @@ const postInventarioSistemas = async (req, res) => {
   } = req.body;
   try {
     if (
+      !codigo ||
       !categoria ||
       !marca ||
       !modelo ||
@@ -42,6 +44,7 @@ const postInventarioSistemas = async (req, res) => {
     }
 
     const newInventario = new InventarioSistemas({
+      codigo,
       categoria,
       marca,
       modelo,
