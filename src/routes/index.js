@@ -100,6 +100,8 @@ const getSedePagination = require("../controllers/AllModulos/Almacen/Ubicacion/g
 const deleteContratoAlmacen = require("../controllers/AllModulos/Almacen/Contrato/deleteContrato");
 const getContratoAlmacenPagination = require("../controllers/AllModulos/Almacen/Contrato/getContratoPagiancion");
 const deleteStockAlmacen = require("../controllers/AllModulos/Almacen/Stock/deleteStockAlmacen");
+const getContratosPaginacion = require("../controllers/Contracts/getContratosPaginacion");
+const recursosHumanosRouter = require("./Sistemas/RecursosHumanos");
 
 const router = Router();
 
@@ -208,5 +210,6 @@ router.get("/employee/:id", getEmployeeById);
 router.get("/ruc", consulApi);
 
 router.use("/sistemas", sistemasRouter);
+router.use("/rrhh", recursosHumanosRouter);
 
 module.exports = router;
