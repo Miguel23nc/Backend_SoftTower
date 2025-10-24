@@ -26,31 +26,16 @@ const inventarioSistemasSchema = new Schema(
     },
     area: {
       type: String,
-      required: true,
-    },
-    encargado: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Employee",
-      required: true,
-    },
-    fecha: {
-      type: String,
-      default: Date.now,
     },
     sede: {
       type: String,
-      required: true,
     },
-    cantidad: {
-      type: Number,
-      required: true,
-    },
-    state: {
+    estado: {
       type: String,
       enum: ["ACTIVO", "INACTIVO"],
       default: "ACTIVO",
     },
-    observacion: {
+    observaciones: {
       type: String,
     },
   },

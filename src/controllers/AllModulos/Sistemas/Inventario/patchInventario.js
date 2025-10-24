@@ -3,16 +3,14 @@ const InventarioSistemas = require("../../../../models/AllModulos/SISTEMAS/Inven
 const patchInventarioSistemas = async (req, res) => {
   const {
     _id,
-    name,
+    categoria,
+    marca,
     modelo,
     especificaciones,
     area,
-    encargado,
-    fecha,
     sede,
-    cantidad,
-    state,
-    observacion,
+    estado,
+    observaciones,
   } = req.body;
   try {
     const inventario = await InventarioSistemas.findById(_id);
@@ -20,28 +18,28 @@ const patchInventarioSistemas = async (req, res) => {
       return res.status(404).json({ message: "Inventario no encontrado" });
     }
     const existingInventario = await InventarioSistemas.findOne({
-      _id: { $ne: _id },
-      name: name,
-      modelo: modelo,
-      especificaciones: especificaciones,
+      categoria,
+      marca,
+      modelo,
+      especificaciones,
     });
 
     if (existingInventario) {
       return res.status(400).json({
         message:
-          "Ya existe un inventario con este nombre, modelo y especificaciones",
+          "Ya existe un inventario con este categoria, marca, modelo y especificaciones",
       });
     }
-    if (name) inventario.name = name;
+
+    if (categoria) inventario.categoria = categoria;
+    if (marca) inventario.marca = marca;
     if (modelo) inventario.modelo = modelo;
     if (especificaciones) inventario.especificaciones = especificaciones;
     if (area) inventario.area = area;
-    if (encargado) inventario.encargado = encargado;
-    if (fecha) inventario.fecha = fecha;
     if (sede) inventario.sede = sede;
-    if (cantidad) inventario.cantidad = cantidad;
-    if (state) inventario.state = state;
-    if (observacion) inventario.observacion = observacion;
+    if (estado) inventario.estado = estado;
+    if (observaciones) inventario.observaciones = observaciones;
+
     await inventario.save();
 
     return res.status(200).json({

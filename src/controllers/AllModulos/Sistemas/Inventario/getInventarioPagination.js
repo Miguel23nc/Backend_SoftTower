@@ -15,20 +15,22 @@ const getInventarioPagination = async (req, res) => {
 
       // Buscar coincidencias por
       query.$or = [
-        { name: regex },
+        { codigo: regex },
+        { categoria: regex },
+        { marca: regex },
         { modelo: regex },
-        { cantidad: regex },
-        { fecha: regex },
-        { fecha: regex },
+        { especificaciones: regex },
+        { area: regex },
+        { sede: regex },
         { cantidad: regex },
         { estado: regex },
+        { observaciones: regex },
       ];
     }
 
     // Ejecutar consultas en paralelo: datos paginados y total de coincidencias
     const [data, total] = await Promise.all([
       InventarioSistemas.find(query)
-        .populate("encargado", "name") // 🔎 trae también el nombre del almacén
         .skip(page * limit)
         .limit(parseInt(limit))
         .lean()

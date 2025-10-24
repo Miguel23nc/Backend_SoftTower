@@ -23,6 +23,9 @@ const getAsistenciaByParams = async (req, res) => {
       query.$or = [
         { colaborador: { $in: colaboradoresIds } },
         { estado: regex },
+        {fecha: regex},
+        {ingreso: regex},
+        {salida: regex},
       ];
     }
 

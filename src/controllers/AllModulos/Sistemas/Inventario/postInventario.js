@@ -8,27 +8,12 @@ const postInventarioSistemas = async (req, res) => {
     modelo,
     especificaciones,
     area,
-    encargado,
-    fecha,
     sede,
-    cantidad,
-    state,
-    observacion,
+    estado,
+    observaciones,
   } = req.body;
   try {
-    if (
-      !codigo ||
-      !categoria ||
-      !marca ||
-      !modelo ||
-      !especificaciones ||
-      !area ||
-      !encargado ||
-      !sede ||
-      !cantidad ||
-      !fecha ||
-      !state
-    ) {
+    if (!codigo || !categoria || !marca || !modelo || !especificaciones) {
       return res.status(400).json({ message: "Faltan datos" });
     }
     const existingItem = await InventarioSistemas.findOne({
@@ -36,6 +21,7 @@ const postInventarioSistemas = async (req, res) => {
       categoria,
       marca,
       modelo,
+      especificaciones,
     });
     if (existingItem) {
       return res
@@ -50,12 +36,9 @@ const postInventarioSistemas = async (req, res) => {
       modelo,
       especificaciones,
       area,
-      encargado,
-      fecha,
       sede,
-      cantidad,
-      state,
-      observacion,
+      estado,
+      observaciones,
     });
 
     await newInventario.save();
