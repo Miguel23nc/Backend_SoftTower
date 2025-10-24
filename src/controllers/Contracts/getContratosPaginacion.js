@@ -34,6 +34,7 @@ const getContratosPaginacion = async (req, res) => {
     // Ejecutar consultas en paralelo: datos paginados y total de coincidencias
     const [data, total] = await Promise.all([
       Contract.find(query)
+        .populate("colaborador", "name lastname business charge")
         .skip(page * limit)
         .limit(parseInt(limit))
         .lean()
