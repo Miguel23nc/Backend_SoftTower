@@ -18,7 +18,13 @@ const contractSchema = new mongoose.Schema(
     },
     dateEnd: {
       type: String,
+    },
+    cargo: {
+      type: String,
       required: true,
+    },
+    sueldo: {
+      type: Number,
     },
     colaborador: {
       type: mongoose.Schema.Types.ObjectId,

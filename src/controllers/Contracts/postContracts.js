@@ -5,10 +5,12 @@ const postContracts = async (req, res) => {
     typeContract,
     dateStart,
     dateEnd,
+    cargo,
     colaborador,
     codigoSPP,
     regimenPension,
   } = req.body;
+
   try {
     if (!typeContract || !dateStart || !dateEnd || !colaborador) {
       return res.status(400).json({ message: "Faltan Datos" });
@@ -17,9 +19,10 @@ const postContracts = async (req, res) => {
       typeContract,
       dateStart,
       dateEnd,
+      cargo,
       colaborador,
-      codigoSPP,
       regimenPension,
+      codigoSPP,
     });
 
     const savedContract = await newContract.save();

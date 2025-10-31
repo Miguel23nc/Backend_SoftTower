@@ -37,8 +37,8 @@ const getContratosPaginacion = async (req, res) => {
         .populate("colaborador", "name lastname business charge")
         .skip(page * limit)
         .limit(parseInt(limit))
-        .lean()
-        .sort({ createdAt: -1 }),
+        .sort({ createdAt: -1 })
+        .lean(),
       Contract.countDocuments(query),
     ]);
 

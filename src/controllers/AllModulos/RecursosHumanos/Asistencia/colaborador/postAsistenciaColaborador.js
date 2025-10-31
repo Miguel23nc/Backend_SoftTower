@@ -17,6 +17,7 @@ const postAsistenciaColaborador = async (req, res) => {
       almuerzoSede,
       finAlmuerzo,
       finAlmuerzoSede,
+      observaciones,
       estado,
       dni,
     } = req.body;
@@ -107,6 +108,7 @@ const postAsistenciaColaborador = async (req, res) => {
       estado: estado || state,
       minExtras: parseInt(horasExtras),
       minTarde: parseInt(minTarde),
+      observaciones,
     });
 
     await asistencia.save();

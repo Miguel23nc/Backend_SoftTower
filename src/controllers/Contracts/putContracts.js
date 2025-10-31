@@ -7,6 +7,8 @@ const putContracts = async (req, res) => {
     state,
     dateStart,
     dateEnd,
+    cargo,
+    sueldo,
     colaborador,
     codigoSpp,
     regimenPension,
@@ -20,6 +22,8 @@ const putContracts = async (req, res) => {
     if (typeContract) updatedContract.typeContract = typeContract;
     if (dateStart) updatedContract.dateStart = dateStart;
     if (dateEnd) updatedContract.dateEnd = dateEnd;
+    if (cargo) updatedContract.cargo = cargo;
+    if (sueldo) updatedContract.sueldo = sueldo;
     if (colaborador) updatedContract.colaborador = colaborador;
     if (state) updatedContract.state = state;
     if (codigoSpp) updatedContract.codigoSpp = codigoSpp;

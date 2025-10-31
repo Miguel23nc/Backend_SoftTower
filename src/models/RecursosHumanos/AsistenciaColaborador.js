@@ -45,6 +45,9 @@ const asistenciaColaboradorSchema = new Schema(
       type: Number,
       default: 0,
     },
+    observaciones: {
+      type: String,
+    },
     estado: {
       type: String,
       enum: ["PRESENTE", "FALTA", "TARDANZA", "PERMISO", "VACACIONES"],

@@ -3,7 +3,7 @@ const Contract = require("../../models/Contracts");
 const getContractById = async (req, res) => {
   try {
     const { id } = req.params;
-    const contract = await Contract.find({ colaborador: id });
+    const contract = await Contract.findOne({ colaborador: id });
     if (!contract) {
       return res.status(404).json({ message: "Contrato no encontrado" });
     }
