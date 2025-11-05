@@ -1,11 +1,7 @@
 const jwt = require("jsonwebtoken");
 const Employee = require("../../models/Employees/Employee");
 const { JWT_SECRET, MASTER_TOKEN } = process.env;
-const publicRoutes = [
-  "/api/login",
-  "/api/recepcionBoleta"
-];
-
+const publicRoutes = ["/api/login", "/api/recepcionBoleta"];
 
 const tokenVerify = async (req, res, next) => {
   const authHeader = req.headers.authorization;
@@ -13,7 +9,7 @@ const tokenVerify = async (req, res, next) => {
     req.cookies?.token ||
     (authHeader?.startsWith("Bearer ") ? authHeader.split(" ")[1] : null);
 
-  if (publicRoutes.some(route => req.path.startsWith(route))) {
+  if (publicRoutes.some((route) => req.path.startsWith(route))) {
     return next();
   }
   if (!token) {
